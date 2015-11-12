@@ -1,0 +1,20 @@
+{
+  "name": "kamome-note",
+  "version": "0.0.0",
+  "homepage": "https://github.com/KamataRyo/kamome-note",
+  "authors": [
+    "KamataRyo <mugil.cephalus+github@gmail.com>"
+  ],
+  "description": "this is a my wordpress theme generation.",
+  "license": "GPL-3.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "d3": "~3.5.6"
+  }
+}

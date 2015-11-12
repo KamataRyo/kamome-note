@@ -1,0 +1,13 @@
+{
+  "action": "http://underscores.me/",
+  "_comment" : "`queries.underscoresme_slug` should be equall to npm root folder.",
+  "queries": {
+    "underscoresme_generate": 1,
+    "underscoresme_name": "kamome note",
+    "underscoresme_slug": "kamome-note",
+    "underscoresme_author": "kamataryo",
+    "underscoresme_author_uri": "https://github.com/KamataRyo/",
+    "underscoresme_description": "This is my blog theme.",
+    "underscoresme_sass": true
+  }
+}

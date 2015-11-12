@@ -1,0 +1,35 @@
+{
+  "name": "kamome-note",
+  "version": "1.0.0",
+  "description": "this is my wordpress theme generation. Files consisting the theme will be under the influence of template engine mustache and \"package.json\" will be used as key:value pairs.",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "coffee setup/install.coffee"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KamataRyo/kamome-note.git"
+  },
+  "author": {
+    "name": "kamataryo",
+    "url": "https://github.com/KamataRyo/"
+  },
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/KamataRyo/kamome-note/issues"
+  },
+  "homepage": "https://github.com/KamataRyo/kamome-note#readme",
+  "devDependencies": {
+    "coffee-script": "^1.10.0",
+    "gulp": "^3.9.0",
+    "gulp-changed": "^1.3.0",
+    "gulp-coffee": "^2.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-mustache": "^2.0.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-sketch": "0.0.10",
+    "request": "^2.65.0",
+    "unzip": "^0.1.11"
+  }
+}

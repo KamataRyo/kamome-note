@@ -1,0 +1,9 @@
+/node_modules/
+/inc/
+/js/
+/template-parts/
+/*.php
+screendhot.png
+!/templates/*
+*.css
+.DS_Store
