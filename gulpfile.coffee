@@ -57,7 +57,7 @@ gulp.task 'wpPot', ()->
         .pipe wpPot
             domain: meta.name
             destFile: "#{meta.name}.pot"
-        .pipe gulp.dest './language'
+        .pipe gulp.dest './languages'
 
 
 gulp.task 'sketchSS', ()->
