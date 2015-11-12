@@ -9,23 +9,25 @@ uglify   = require 'gulp-uglify'
 compass  = require 'gulp-compass'
 minify   = require 'gulp-minify-css'
 
-changed  = require 'gulp-changed'
+sort     = require 'gulp-sort'
+wpPot    = require 'gulp-wp-pot'
 
 sketch   = require 'gulp-sketch'
 
-
+meta     = require './package.json'
 
 scopes = [
     'coffee/**/*.coffee'
     'sass/**/*.scss'
+    '**/*.php'
     'sketch/**/*.sketch'
 ]
-tasks = ['coffee', 'compass', 'sketchSS']
+tasks = ['coffee', 'compass', 'wpPot', 'sketchSS']
 
 src =
     coffee:   'coffee/**/*.coffee'
     compass:  'sass/**/*.sass'
-    pot:      'languages/*.pot'
+    wpPot:    '**/*.php'
     sketchSS: 'sketch/screenshot.sketch'
 
 gulp.task 'coffee', ()->
@@ -48,19 +50,24 @@ gulp.task 'compass', ()->
         .pipe gulp.dest './'
 
 
+gulp.task 'wpPot', ()->
+    gulp.src src['wpPot']
+        .pipe plumber(errorHandler: notify.onError '<%= error.message %>')
+        .pipe sort()
+        .pipe wpPot
+            domain: meta.name
+            destFile: "#{meta.name}.pot"
+        .pipe gulp.dest './language'
+
+
 gulp.task 'sketchSS', ()->
     gulp.src src['sketchSS']
-        #.pipe changed './'
         .pipe plumber(errorHandler: notify.onError '<%= error.message %>')
         .pipe sketch
             export: 'artboards'
             formats: 'png'
         .pipe gulp.dest './'
 
-
-# gulp.task 'pot', ()->
-#     gulp.src src['pot']
-#         .pipe changed './languages/'
 
 
 gulp.task 'watch', ()->
