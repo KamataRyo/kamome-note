@@ -7,7 +7,7 @@ concat   = require 'gulp-concat'
 uglify   = require 'gulp-uglify'
 
 compass  = require 'gulp-compass'
-minify   = require 'gulp-mibify-css'
+minify   = require 'gulp-minify-css'
 
 changed  = require 'gulp-changed'
 
