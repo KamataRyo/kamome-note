@@ -2,6 +2,19 @@ request = require 'request'
 fs      = require 'fs'
 unzip   = require 'unzip'
 meta    = require '../package.json'
+
+
+unless meta.name?
+    console.log 'package name is undefined.\nInstallation has been interrupted.'
+    return
+
+unless meta.author?
+    meta.author =
+        name: ''
+        url: ''
+if meta.description?
+    meta.description = ''
+
 options = {
     uri:  "http://underscores.me/"
     form:
