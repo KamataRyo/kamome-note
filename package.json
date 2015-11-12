@@ -1,7 +1,7 @@
 {
   "name": "kamome-note",
   "version": "1.0.0",
-  "description": "this is my wordpress theme generation. Files consisting the theme will be under the influence of template engine mustache and \"package.json\" will be used as key:value pairs.",
+  "description": "this is my wordpress theme generation based on _s.",
   "main": "index.js",
   "scripts": {
     "postinstall": "coffee setup/install.coffee"
@@ -24,7 +24,9 @@
     "gulp": "^3.9.0",
     "gulp-changed": "^1.3.0",
     "gulp-coffee": "^2.3.1",
+    "gulp-compass": "^2.1.0",
     "gulp-concat": "^2.6.0",
+    "gulp-minify-css": "^1.2.1",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.0.1",
     "gulp-sketch": "0.0.10",

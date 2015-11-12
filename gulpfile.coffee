@@ -1,19 +1,30 @@
 gulp     = require 'gulp'
 plumber  = require 'gulp-plumber'
 notify   = require 'gulp-notify'
+
 coffee   = require 'gulp-coffee'
 concat   = require 'gulp-concat'
 uglify   = require 'gulp-uglify'
+
+compass  = require 'gulp-compass'
+minify   = require 'gulp-mibify-css'
+
 changed  = require 'gulp-changed'
+
 sketch   = require 'gulp-sketch'
 
+
+
 scopes = [
-    'templates/mustache/**/*.*'
+    'coffee/**/*.coffee'
+    'sass/**/*.scss'
+    'sketch/**/*.sketch'
 ]
-tasks = ['coffee', 'js','php', 'sketchSS']
+tasks = ['coffee', 'compass', 'sketchSS']
 
 src =
     coffee:   'coffee/**/*.coffee'
+    compass:  'sass/**/*.sass'
     pot:      'languages/*.pot'
     sketchSS: 'sketch/screenshot.sketch'
 
@@ -25,6 +36,16 @@ gulp.task 'coffee', ()->
         .pipe uglify()
         .pipe gulp.dest './js/'
 
+
+gulp.task 'compass', ()->
+    gulp.src src['compass']
+        .pipe plumber(errorHandler: notify.onError '<%= error.message %>')
+        .pipe compass
+            config_file: './config.rb',
+            css: './',
+            sass: 'sass'
+        .pipe minify()
+        .pipe gulp.dest './'
 
 
 gulp.task 'sketchSS', ()->
