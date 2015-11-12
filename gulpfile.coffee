@@ -26,7 +26,7 @@ tasks = ['coffee', 'compass', 'wpPot', 'sketchSS']
 
 src =
     coffee:   'coffee/**/*.coffee'
-    compass:  'sass/**/*.sass'
+    compass:  'sass/**/*.scss'
     wpPot:    '**/*.php'
     sketchSS: 'sketch/screenshot.sketch'
 
