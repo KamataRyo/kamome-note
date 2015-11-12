@@ -1,9 +1,3 @@
 /node_modules/
-/inc/
-/js/
-/template-parts/
-/*.php
-screendhot.png
-!/templates/*
-*.css
+screenshot.png
 .DS_Store
