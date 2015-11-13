@@ -20,7 +20,7 @@ This is a WordPress theme developmental environment generation.
 
     `git clone -b development_base git@github.com:KamataRyo/kamome-note.git your-theme-slug`
 
-2. Edit `package.json`. Examples are below and these values will be applied to underscores. `name` value *must* be equal to `your-slug-name`.
+2. Edit `package.json`. Examples are below and these values will be applied to underscores. `name` value *must* be equal to `your-theme-slug`.
 
     ```json
     {
