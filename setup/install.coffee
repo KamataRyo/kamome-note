@@ -45,6 +45,8 @@ fs.stat '../style.css', (err, stats) ->
         if err.code is 'ENOENT'
             # No theme exists.
             request.post(options)
+                .on 'error', (err)->
+                    console.log "broken pipe, http error: #{err}"
                 .pipe unzip.Extract path: '../'
                 .on 'close', ()->
                     console.log 'Theme installation has been successed.'
