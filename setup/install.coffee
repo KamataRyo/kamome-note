@@ -34,8 +34,7 @@ dirArray = __dirname.split '/'
 dirArray.pop()
 rootName = dirArray.pop()
 
-
-if rootName isnt meta.name
+if (rootName isnt meta.name) or (rootName is '')
     console.log 'Unsuitable root directory name.\nInstallation has been interrupted.'
     return
 

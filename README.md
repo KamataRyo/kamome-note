@@ -3,24 +3,19 @@ This is a WordPress theme developmental environment generation.
 
 ## features
 - based on [underscores](http://underscores.me/)
-- gulp based developmental environment
-    - CoffeeScript compiling
-    - uglify JavaScript
-    - Compass (scss)
-    - CSS minify
-    - pot file generation
-    - sketch
-- bower for front-end libraries
+- with a gulpfile
 
 ## requires
 - CoffeeScript to run `gulpfile.coffee` and `setup/install.coffee`
 
 ## Installation
-1. Clone this branch, `development_base`.
+1. `git clone -b development_base git@github.com:KamataRyo/kamome-note.git your-theme-slug`
 
-    `git clone -b development_base git@github.com:KamataRyo/kamome-note.git your-theme-slug`
+    Clone the `development_base` branch of this repo.
 
-2. Edit `package.json`. Examples are below and these values will be applied to underscores. `name` value *must* be equal to `your-theme-slug`.
+2. `vi package.json`
+
+    Edit the metafile `package.json` as you like, but `name` value of the package *must* be equal to `your-theme-slug`.
 
     ```json
     {
@@ -33,6 +28,10 @@ This is a WordPress theme developmental environment generation.
     }
     ```
 
-3. Set the cloned package up. `setup/install.coffee` runs at postinstall and install underscores.
+3. `npm install`
 
-    `npm install`
+    Set the cloned package up. The script `setup/install.coffee` runs at post-install and downloads the underscores theme.
+
+4. Do anything.
+
+    ex. edit gulp files as you like.
