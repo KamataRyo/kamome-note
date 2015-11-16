@@ -118,6 +118,7 @@ function kamome_note_scripts() {
 
 	//defaults
 	wp_enqueue_style( 'kamome-note-style', get_stylesheet_uri(), 'bootstrap' );
+	#wp_enqueue_style( 'kamome-note-style', get_template_directory_uri() . '/style-rtl.css', 'bootstrap' );
 
 	wp_enqueue_script( 'kamome-note-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
 
