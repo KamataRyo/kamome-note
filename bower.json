@@ -15,6 +15,7 @@
     "tests"
   ],
   "devDependencies": {
-    "bootstrap": "~3.3.5"
+    "bootstrap": "~3.3.5",
+    "bootstrap-rtl": "~3.3.4"
   }
 }
