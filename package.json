@@ -26,6 +26,7 @@
     "gulp-coffee": "^2.3.1",
     "gulp-compass": "^2.1.0",
     "gulp-concat": "^2.6.0",
+    "gulp-gettext": "^0.1.0",
     "gulp-minify-css": "^1.2.1",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.0.1",
