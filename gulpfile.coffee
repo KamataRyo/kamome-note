@@ -14,6 +14,8 @@ rtlcss   = require 'gulp-rtlcss'
 sort     = require 'gulp-sort'
 wpPot    = require 'gulp-wp-pot'
 
+gettext  = require 'gulp-gettext'
+
 sketch   = require 'gulp-sketch'
 
 meta     = require './package.json'
@@ -22,14 +24,16 @@ scopes = [
     'coffee/**/*.coffee'
     'sass/**/*.scss'
     '**/*.php'
+    'languages/*.po'
     'sketch/**/*.sketch'
 ]
-tasks = ['coffee', 'compass', 'wpPot', 'sketchSS']
+tasks = ['coffee', 'compass', 'wpPot', 'gettext', 'sketchSS']
 
 src =
     coffee:   'coffee/**/*.coffee'
     compass:  'sass/**/*.scss'
     wpPot:    '**/*.php'
+    gettext:  'languages/*.po'
     sketchSS: 'sketch/screenshot.sketch'
 
 gulp.task 'coffee', ()->
@@ -62,6 +66,13 @@ gulp.task 'wpPot', ()->
         .pipe wpPot
             domain: meta.name
             destFile: "#{meta.name}.pot"
+        .pipe gulp.dest './languages'
+
+
+gulp.task 'gettext', ()->
+    gulp.src src['gettext']
+        .pipe plumber(errorHandler: notify.onError '<%= error.message %>')
+        .pipe gettext()
         .pipe gulp.dest './languages'
 
 
