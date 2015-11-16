@@ -1,6 +1,7 @@
 gulp     = require 'gulp'
 plumber  = require 'gulp-plumber'
 notify   = require 'gulp-notify'
+rename   = require 'gulp-rename'
 
 coffee   = require 'gulp-coffee'
 concat   = require 'gulp-concat'
@@ -8,6 +9,7 @@ uglify   = require 'gulp-uglify'
 
 compass  = require 'gulp-compass'
 minify   = require 'gulp-minify-css'
+rtlcss   = require 'gulp-rtlcss'
 
 sort     = require 'gulp-sort'
 wpPot    = require 'gulp-wp-pot'
@@ -47,6 +49,9 @@ gulp.task 'compass', ()->
             css: './',
             sass: 'sass'
         .pipe minify()
+        .pipe gulp.dest './'
+        .pipe rtlcss()
+        .pipe rename suffix:'-rtl'
         .pipe gulp.dest './'
 
 
