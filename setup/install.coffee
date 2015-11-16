@@ -1,7 +1,15 @@
+# get root directory name
+dirArray = __dirname.split '/'
+dirArray.pop()
+absPath = dirArray.join '/'
+rootName = dirArray.pop()
+console.log absPath
+
+
 request = require 'request'
 fs      = require 'fs'
 unzip   = require 'unzip'
-meta    = require '../package.json'
+meta    = require "#{absPath}/package.json"
 
 
 unless meta.name?
@@ -29,21 +37,17 @@ options = {
 }
 
 
-# get root directory name
-dirArray = __dirname.split '/'
-dirArray.pop()
-rootName = dirArray.pop()
-
 
 if rootName isnt meta.name
     console.log 'Unsuitable root directory name.\nInstallation has been interrupted.'
     return
 
 
-fs.stat '../style.css', (err, stats) ->
+fs.stat "#{absPath}/style.css", (err, stats) ->
     if err
         if err.code is 'ENOENT'
-            # No theme exists.
+            console.log err
+            No theme exists.
             request.post(options)
                 .on 'error', (err)->
                     console.log "broken pipe, http error: #{err}"
