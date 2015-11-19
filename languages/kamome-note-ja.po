@@ -28,7 +28,7 @@ msgstr ""
 
 #: 404.php:46
 msgid "Try looking in the monthly archives. %1$s"
-msgstr ""
+msgstr "月ごとのアーカイブを探してみましょう %1$s"
 
 #: comments.php:31
 msgctxt "comments title"
@@ -124,7 +124,7 @@ msgid "Nothing Found"
 msgstr ""
 
 #: template-parts/content-none.php:20
-msgid "Ready to publish your first post? <a href="%1$s">Get started here</a>."
+msgid "Ready to publish your first post? <a href=%1$s>Get started here</a>."
 msgstr ""
 
 #: template-parts/content-none.php:24
@@ -140,5 +140,5 @@ msgid "Pages:"
 msgstr ""
 
 #: template-parts/content.php:27
-msgid "Continue reading %s <span class="meta-nav">&rarr;</span>"
+msgid "Continue reading %s <span class=meta-nav>&rarr;</span>"
 msgstr ""

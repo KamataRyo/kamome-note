@@ -14,19 +14,19 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
 
-#: 404.php:17
+#: 404.php:18
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
-#: 404.php:21
+#: 404.php:22
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
 msgstr ""
 
-#: 404.php:29
+#: 404.php:30
 msgid "Most Used Categories"
 msgstr ""
 
-#: 404.php:46
+#: 404.php:47
 msgid "Try looking in the monthly archives. %1$s"
 msgstr ""
 
@@ -53,15 +53,15 @@ msgstr ""
 msgid "Comments are closed."
 msgstr ""
 
-#: footer.php:18
+#: footer.php:19
 msgid "https://wordpress.org/"
 msgstr ""
 
-#: footer.php:18
+#: footer.php:19
 msgid "Proudly powered by %s"
 msgstr ""
 
-#: footer.php:20
+#: footer.php:21
 msgid "Theme: %1$s by %2$s."
 msgstr ""
 
@@ -115,7 +115,7 @@ msgstr ""
 msgid "Edit %s"
 msgstr ""
 
-#: search.php:18
+#: search.php:19
 msgid "Search Results for: %s"
 msgstr ""
 
