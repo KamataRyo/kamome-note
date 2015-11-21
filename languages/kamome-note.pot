@@ -65,7 +65,7 @@ msgstr ""
 msgid "Theme: %1$s by %2$s."
 msgstr ""
 
-#: functions.php:47, header.php:42
+#: functions.php:47, header.php:45
 msgid "Primary Menu"
 msgstr ""
 
@@ -73,7 +73,7 @@ msgstr ""
 msgid "Sidebar"
 msgstr ""
 
-#: header.php:25
+#: header.php:29
 msgid "Skip to content"
 msgstr ""
 
