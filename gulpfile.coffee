@@ -73,7 +73,7 @@ gulp.task 'gettext', ()->
     gulp.src src['gettext']
         .pipe plumber(errorHandler: notify.onError '<%= error.message %>')
         .pipe gettext()
-        .pipe gulp.dest './languages'
+        .pipe gulp.dest '../../languages/themes/'
 
 
 gulp.task 'sketchSS', ()->
