@@ -14,19 +14,19 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
 
-#: 404.php:19
+#: 404.php:18
 msgid "Oops! That page can&rsquo;t be found."
-msgstr ""
+msgstr "この場所には何もないようです..."
 
-#: 404.php:23
+#: 404.php:22
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
 msgstr ""
 
-#: 404.php:31
+#: 404.php:30
 msgid "Most Used Categories"
 msgstr ""
 
-#: 404.php:48
+#: 404.php:47
 msgid "Try looking in the monthly archives. %1$s"
 msgstr ""
 
@@ -65,15 +65,15 @@ msgstr ""
 msgid "Theme: %1$s by %2$s."
 msgstr ""
 
-#: functions.php:47
+#: functions.php:47, header.php:45
 msgid "Primary Menu"
 msgstr ""
 
-#: functions.php:103
+#: functions.php:102
 msgid "Sidebar"
 msgstr ""
 
-#: header.php:30
+#: header.php:29
 msgid "Skip to content"
 msgstr ""
 
@@ -115,7 +115,7 @@ msgstr ""
 msgid "Edit %s"
 msgstr ""
 
-#: search.php:21
+#: search.php:19
 msgid "Search Results for: %s"
 msgstr ""
 
@@ -135,10 +135,10 @@ msgstr ""
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr ""
 
-#: template-parts/content-page.php:21, template-parts/content-single.php:25, template-parts/content.php:62
+#: template-parts/content-page.php:21, template-parts/content-single.php:25, template-parts/content.php:34
 msgid "Pages:"
 msgstr ""
 
-#: template-parts/content.php:55
+#: template-parts/content.php:27
 msgid "Continue reading %s <span class="meta-nav">&rarr;</span>"
 msgstr ""

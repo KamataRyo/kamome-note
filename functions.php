@@ -76,6 +76,7 @@ function kamome_note_setup() {
 		'default-color' => 'ffffff',
 		'default-image' => '',
 	) ) );
+
 }
 endif; // kamome_note_setup
 add_action( 'after_setup_theme', 'kamome_note_setup' );
@@ -134,6 +135,42 @@ function kamome_note_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'kamome_note_scripts' );
+
+
+/**
+ * Control Bootstrap Grids.
+ */
+define( 'KAMOME_NOTE_BOOTSTRAP_GRID_OF_MAIN_COL', 'col-xs-12 col-sm-8 col-md-9 col-lg-10 pull-right' );
+define( 'KAMOME_NOTE_BOOTSTRAP_GRID_OF_SIDEBAR_COL', 'col-xs-12 col-sm-4 col-md-3 col-lg-2' );
+function kamome_note_open_grid_loop( $count ) {
+	if ( $count < 4 ) {
+		echo '<div class="row"><div class="post-grid_wrapper col-xs-12">';
+	} else {
+		if ( $count % 2 === 0 ) {
+			echo '<div class="row"><div class="post-grid_wrapper col-xs-12 col-sm-6">';
+		} else {
+			echo '<div class="post-grid_wrapper col-xs-12 col-sm-6">';
+		}
+	}
+}
+function kamome_note_close_grid_loop ( $count ) {
+	if ( $count < 4 ) {
+		echo '</div></div>';
+	} else {
+		if ( $count % 2 === 0 ) {
+			echo '</div>';
+		} else {
+			echo '</div></div>';
+		}
+	}
+}
+function kamome_note_close_grid_loop_terminator ($count) {
+	if ( $count > 3 && $count % 2 === 0 ) {
+		echo '</div>';
+	}
+}
+
+
 
 /**
  * Implement the Custom Header feature.

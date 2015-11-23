@@ -12,9 +12,11 @@
  * @package kamome-note
  */
 
-get_header(); ?>
+get_header();
+?>
 
-<div class="contents-grid_wrapper col-xs-12 col-sm-8">
+
+<div class="contents-grid_wrapper <?php echo KAMOME_NOTE_BOOTSTRAP_GRID_OF_MAIN_COL; ?>">
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
@@ -35,5 +37,6 @@ get_header(); ?>
 	</div><!-- #primary -->
 </div><!--.col-->
 
-<?php get_sidebar(); ?>
-<?php get_footer(); ?>
+<?php
+get_sidebar();
+get_footer();

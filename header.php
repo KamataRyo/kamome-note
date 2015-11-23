@@ -22,11 +22,12 @@
 
 <body <?php body_class(); ?>>
 <div id="page" class="site">
-	<div class="container">
-		<div class="row">
 
+	<div class="container-fluid">
+		<div class="row">
 			<div class="col-xs-12">
-				<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'kamome-note' ); ?></a>
+
+				<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'kamome-note' ); ?></a>
 				<header id="masthead" class="site-header" role="banner">
 					<div class="site-branding">
 						<?php if ( is_front_page() && is_home() ) : ?>
@@ -41,13 +42,10 @@
 						<?php endif; ?>
 					</div><!-- .site-branding -->
 
-					<nav id="site-navigation" class="main-navigation" role="navigation">
-						<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'kamome-note' ); ?></button>
-						<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
-					</nav><!-- #site-navigation -->
-				</header><!-- #masthead -->
-			</div><!--.col-->
 
+				</header><!-- #masthead -->
+
+			</div><!--.col-->
 		</div><!--.row-->
 
 		<div class="row">

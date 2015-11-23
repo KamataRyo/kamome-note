@@ -14,7 +14,7 @@
 		</div><!-- #content -->
 	</div><!--.container-->
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
+	<footer id="colophon" class="site-footer text-center" role="contentinfo">
 		<div class="site-info">
 			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'kamome-note' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'kamome-note' ), 'WordPress' ); ?></a>
 			<span class="sep"> | </span>
