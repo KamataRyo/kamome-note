@@ -1,16 +1,27 @@
 /*kamome-note sass*/
+$header_height: 300px;
+$c1: #CFD5DF;
+$c2: #A1BFE3;
+$c3: #8BB0DE;
+$c4: #639DE1;
+$c5: #6E7C92;
+
+
 html {
     font-size: 12px;
 }
 .contents-grid_wrapper {
-    border: black solid 1px;
 }
 .post-grid_wrapper {
-    border: black solid 1px;
+    background-color: $c1;
+    border: 2px solid white;
 }
 
 .header-row {
-    background-color: #777;
+    height: $header_height;
+    background-repeat: no-repeat;
+    // background-size:contain;
+    background-position:center;
     .site-title {
         display: inline-block;
         margin: 5px;
@@ -23,10 +34,6 @@ html {
         }
     }
 }
-.footer-row {
-    background-color: #777;
-    padding:10px 0 20px 0;
-}
 
 .sidebar-grid_wrapper {
     padding: 0;
@@ -37,10 +44,16 @@ html {
         margin: 0;
         padding: 0;
         li.cat-item {
-            display: block;
-            padding: 5px;
-            border: 1px solid black;
+            display: inline-block;
+            padding: 0 2px 0 0;
+            margin: 2px;
+            background-color: $c2;
             list-style: none;
         }
     }
+}
+
+.footer-row {
+    background-color: $c5;
+    padding:10px 0 20px 0;
 }

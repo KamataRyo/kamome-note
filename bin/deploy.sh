@@ -16,7 +16,6 @@ rm -rf .git
 rm -r .gitignore
 
 echo ".bowerrc
-.editorconfig
 .travis.yml
 README.md
 bin
@@ -27,8 +26,7 @@ config.rb
 bower.json
 gulpfile.coffee
 node_modules
-package.json
-tmp" > .gitignore
+package.json" > .gitignore
 
 git init
 git config user.name "kamataryo"

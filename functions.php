@@ -140,8 +140,10 @@ add_action( 'wp_enqueue_scripts', 'kamome_note_scripts' );
 /**
  * Control Bootstrap Grids.
  */
-define( 'KAMOME_NOTE_BOOTSTRAP_GRID_OF_MAIN_COL', 'col-xs-12 col-sm-8 col-md-9 col-lg-10 pull-right' );
-define( 'KAMOME_NOTE_BOOTSTRAP_GRID_OF_SIDEBAR_COL', 'col-xs-12 col-sm-4 col-md-3 col-lg-2' );
+// define( 'KAMOME_NOTE_BOOTSTRAP_GRID_OF_MAIN_COL', 'col-xs-12 col-sm-8 col-md-9 col-lg-10 pull-right' );
+// define( 'KAMOME_NOTE_BOOTSTRAP_GRID_OF_SIDEBAR_COL', 'col-xs-12 col-sm-4 col-md-3 col-lg-2' );
+define( 'KAMOME_NOTE_BOOTSTRAP_GRID_OF_MAIN_COL', 'col-xs-12' );
+define( 'KAMOME_NOTE_BOOTSTRAP_GRID_OF_SIDEBAR_COL', 'col-xs-12' );
 function kamome_note_open_grid_loop( $count ) {
 	if ( $count < 4 ) {
 		echo '<div class="row"><div class="post-grid_wrapper col-xs-12">';
@@ -169,6 +171,10 @@ function kamome_note_close_grid_loop_terminator ($count) {
 		echo '</div>';
 	}
 }
+
+
+
+
 
 
 
