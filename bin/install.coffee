@@ -52,10 +52,10 @@ fs.stat "#{absPath}/style.css", (err, stats) ->
                     console.log "broken pipe, http error: #{err}"
                 .pipe unzip.Extract path: '../'
                 .on 'close', ()->
-                    console.log 'Theme installation has been successed.'
+                    console.log 'Initial theme installation of underscores has been successed.'
         else
             #unknown error
-            console.log "Some other error. err.code: #{err.code}"
+            console.log "Some other error. err.code: #{err.code}\nInitial theme installation of underscores has been interrupted."
     else
         # Another theme may exist.
-        console.log 'A theme seems to exist.\nInstallation has been interrupted.'
+        console.log 'A theme seems to exist.\nInitial theme installation of underscores has been interrupted.'
