@@ -29,7 +29,7 @@ scopes = [
 ]
 tasks = [
     'coffee'
-    #'compass'
+    'compass'
     'wpPot'
     'gettext'
     'sketchSS'
