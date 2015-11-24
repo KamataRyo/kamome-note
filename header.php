@@ -24,7 +24,7 @@
 <div id="page" class="site">
 
 	<div class="container-fluid">
-		<div class="row">
+		<div class="row header-row">
 			<div class="col-xs-12">
 
 				<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'kamome-note' ); ?></a>
