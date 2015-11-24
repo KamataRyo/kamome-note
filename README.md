@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/KamataRyo/kamome-note.svg?branch=master)](https://travis-ci.org/KamataRyo/kamome-note)
+
 # kamome-note
 This is a WordPress theme developmental environment generation.
 
