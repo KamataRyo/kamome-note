@@ -27,7 +27,13 @@ scopes = [
     'languages/*.po'
     'sketch/**/*.sketch'
 ]
-tasks = ['coffee', 'compass', 'wpPot', 'gettext', 'sketchSS']
+tasks = [
+    'coffee'
+    #'compass'
+    'wpPot'
+    'gettext'
+    'sketchSS'
+]
 
 src =
     coffee:   'coffee/**/*.coffee'
