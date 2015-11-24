@@ -37,4 +37,3 @@ This is a WordPress theme developmental environment generation.
 4. Do anything.
 
     ex. edit gulp files as you like.
->>>>>>> development_base
