@@ -4,7 +4,8 @@
   "description": "this is my wordpress theme generation based on _s.",
   "main": "index.js",
   "scripts": {
-    "postinstall": "coffee setup/install.coffee"
+    "postinstall": "coffee setup/install.coffee",
+    "build": "./node_modules/gulp/bin/gulp.js",
   },
   "repository": {
     "type": "git",

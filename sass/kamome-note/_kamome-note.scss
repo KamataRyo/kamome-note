@@ -1,8 +1,46 @@
 /*kamome-note sass*/
-.sidebar-grid_wrapper {}
+html {
+    font-size: 12px;
+}
 .contents-grid_wrapper {
     border: black solid 1px;
 }
 .post-grid_wrapper {
     border: black solid 1px;
+}
+
+.header-row {
+    background-color: #777;
+    .site-title {
+        display: inline-block;
+        margin: 5px;
+    }
+    .site-description{
+        display: inline-block;
+        margin: 5px;
+        &:before {
+            content : '|';
+        }
+    }
+}
+.footer-row {
+    background-color: #777;
+    padding:10px 0 20px 0;
+}
+
+.sidebar-grid_wrapper {
+    padding: 0;
+    .widget-title {
+        display: none;
+    }
+    ul {
+        margin: 0;
+        padding: 0;
+        li.cat-item {
+            display: block;
+            padding: 5px;
+            border: 1px solid black;
+            list-style: none;
+        }
+    }
 }
