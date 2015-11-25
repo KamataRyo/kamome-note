@@ -87,31 +87,31 @@ msgctxt "post author"
 msgid "by %s"
 msgstr ""
 
-#: inc/template-tags.php:50, inc/template-tags.php:56
+#: inc/template-tags.php:65, inc/template-tags.php:71
 msgid ", "
 msgstr ""
 
-#: inc/template-tags.php:52
+#: inc/template-tags.php:67
 msgid "Posted in %1$s"
 msgstr ""
 
-#: inc/template-tags.php:58
+#: inc/template-tags.php:73
 msgid "Tagged %1$s"
 msgstr ""
 
-#: inc/template-tags.php:64
+#: inc/template-tags.php:79
 msgid "Leave a comment"
 msgstr ""
 
-#: inc/template-tags.php:64
+#: inc/template-tags.php:79
 msgid "1 Comment"
 msgstr ""
 
-#: inc/template-tags.php:64
+#: inc/template-tags.php:79
 msgid "% Comments"
 msgstr ""
 
-#: inc/template-tags.php:71, template-parts/content-page.php:32
+#: inc/template-tags.php:86, template-parts/content-page.php:32
 msgid "Edit %s"
 msgstr ""
 
@@ -135,10 +135,6 @@ msgstr ""
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr ""
 
-#: template-parts/content-page.php:21, template-parts/content-single.php:25, template-parts/content.php:62
+#: template-parts/content-page.php:21, template-parts/content-single.php:25, template-parts/content.php:31
 msgid "Pages:"
-msgstr ""
-
-#: template-parts/content.php:55
-msgid "Continue reading %s <span class="meta-nav">&rarr;</span>"
 msgstr ""

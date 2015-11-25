@@ -145,29 +145,21 @@ add_action( 'wp_enqueue_scripts', 'kamome_note_scripts' );
 define( 'KAMOME_NOTE_BOOTSTRAP_GRID_OF_MAIN_COL', 'col-xs-12' );
 define( 'KAMOME_NOTE_BOOTSTRAP_GRID_OF_SIDEBAR_COL', 'col-xs-12' );
 function kamome_note_open_grid_loop( $count ) {
-	if ( $count < 4 ) {
-		echo '<div class="row"><div class="post-grid_wrapper col-xs-12">';
+	if ( $count % 3 === 1 ) {
+		echo '<div class="row"><div class="post-grid_wrapper col-xs-12 col-sm-6 col-md-4">';
 	} else {
-		if ( $count % 2 === 0 ) {
-			echo '<div class="row"><div class="post-grid_wrapper col-xs-12 col-sm-6">';
-		} else {
-			echo '<div class="post-grid_wrapper col-xs-12 col-sm-6">';
+		echo '<div class="post-grid_wrapper col-xs-12 col-sm-6 col-md-4">';
 		}
-	}
 }
 function kamome_note_close_grid_loop ( $count ) {
-	if ( $count < 4 ) {
-		echo '</div></div>';
+	if ( $count % 3 === 1 || $count % 3 === 2 ) {
+		echo '</div>';
 	} else {
-		if ( $count % 2 === 0 ) {
-			echo '</div>';
-		} else {
-			echo '</div></div>';
-		}
+		echo '</div></div>';
 	}
 }
 function kamome_note_close_grid_loop_terminator ($count) {
-	if ( $count > 3 && $count % 2 === 0 ) {
+	if ( $count % 3 === 1  || $count % 3 === 2  ) {
 		echo '</div>';
 	}
 }

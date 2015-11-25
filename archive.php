@@ -26,11 +26,10 @@ get_header();
 			</header><!-- .page-header -->
 
 			<?php /* Start the Loop */ ?>
-			<?php global $kamome_note_loop_count; ?>
-			<?php $kamome_note_loop_count = 0; ?>
+			<?php $count = 0; ?>
 			<?php while ( have_posts() ) : the_post(); ?>
-				<?php $kamome_note_loop_count++; ?>
-				<?php kamome_note_open_grid_loop( $kamome_note_loop_count ); ?>
+				<?php $count++; ?>
+				<?php kamome_note_open_grid_loop( $count ); ?>
 				<?php
 					/*
 					 * Include the Post-Format-specific template for the content.
@@ -39,9 +38,9 @@ get_header();
 					 */
 					get_template_part( 'template-parts/content', get_post_format() );
 				?>
-				<?php kamome_note_close_grid_loop( $kamome_note_loop_count ); ?>
+				<?php kamome_note_close_grid_loop( $count ); ?>
 			<?php endwhile; ?>
-			<?php kamome_note_close_grid_loop_terminator( $kamome_note_loop_count ); ?>
+			<?php kamome_note_close_grid_loop_terminator( $count ); ?>
 			<?php the_posts_navigation(); ?>
 			<?php /* finish the Loop */ ?>
 

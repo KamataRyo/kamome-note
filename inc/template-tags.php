@@ -39,11 +39,26 @@ function kamome_note_posted_on() {
 }
 endif;
 
-if ( ! function_exists( 'kamome_note_entry_footer' ) ) :
+
+if ( ! function_exists( 'kamome_note_thumbnail' ) ) :
+/**
+ * Prints post thumbnail or noimage if not exist.
+ */
+function kamome_note_post_thumbnail() {
+	if ( has_post_thumbnail() ) {
+		the_post_thumbnail();
+	} else {
+		echo '<img src="' . get_template_directory_uri() . '/img/noimage.png' . '" />';
+	}
+}
+endif;
+
+
+if ( ! function_exists( 'kamome_note_tag_and_category' ) ) :
 /**
  * Prints HTML with meta information for the categories, tags and comments.
  */
-function kamome_note_entry_footer() {
+function kamome_note_tag_and_category() {
 	// Hide category and tag text for pages.
 	if ( 'post' === get_post_type() ) {
 		/* translators: used between list items, there is a space after the comma */

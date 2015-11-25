@@ -1,5 +1,9 @@
 /*kamome-note sass*/
+@import "compass/css3/border-radius";
+
+
 $header_height: 300px;
+$article_gap: 10px;
 $c1: #CFD5DF;
 $c2: #A1BFE3;
 $c3: #8BB0DE;
@@ -10,18 +14,26 @@ $c5: #6E7C92;
 html {
     font-size: 12px;
 }
+body {
+    background-color: $c1;
+}
+
+
 .contents-grid_wrapper {
 }
+
 .post-grid_wrapper {
-    background-color: $c1;
-    border: 2px solid white;
+    background-color: $c3;
+    border: $article_gap solid $c1;
+    @include border-radius(15px);
+    margin: 0;
 }
 
 .header-row {
     height: $header_height;
     background-repeat: no-repeat;
-    // background-size:contain;
     background-position:center;
+    margin-bottom: $article_gap;
     .site-title {
         display: inline-block;
         margin: 5px;
@@ -45,9 +57,10 @@ html {
         padding: 0;
         li.cat-item {
             display: inline-block;
-            padding: 0 2px 0 0;
-            margin: 2px;
+            padding: 2px 8px;
+            margin: 4px;
             background-color: $c2;
+            @include border-radius(20px);
             list-style: none;
         }
     }
