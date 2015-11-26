@@ -18,17 +18,6 @@ body {
     background-color: $c1;
 }
 
-
-.contents-grid_wrapper {
-}
-
-.post-grid_wrapper {
-    background-color: $c3;
-    border: $article_gap solid $c1;
-    @include border-radius(15px);
-    margin: 0;
-}
-
 .header-row {
     height: $header_height;
     background-repeat: no-repeat;
@@ -45,6 +34,17 @@ body {
             content : '|';
         }
     }
+}
+
+
+.contents-grid_wrapper {
+}
+
+.post-grid_wrapper {
+    background-color: $c3;
+    border: $article_gap solid $c1;
+    @include border-radius(15px);
+    margin: 0;
 }
 
 .sidebar-grid_wrapper {

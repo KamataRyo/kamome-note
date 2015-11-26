@@ -31,7 +31,6 @@ get_header();
 			<?php $count = 0; ?>
 			<?php while ( have_posts() ) : the_post(); ?>
 				<?php $count++; ?>
-				<?php kamome_note_open_grid_loop( $count ); ?>
 				<?php
 					/*
 					 * Include the Post-Format-specific template for the content.
@@ -40,9 +39,8 @@ get_header();
 					 */
 					get_template_part( 'template-parts/content', get_post_format() );
 				?>
-				<?php kamome_note_close_grid_loop( $count ); ?>
 			<?php endwhile; ?>
-			<?php kamome_note_close_grid_loop_terminator( $count ); ?>
+			<p><a id="readmore">READ MORE</a></p>
 			<?php the_posts_navigation(); ?>
 			<?php /* finish the Loop */ ?>
 
