@@ -87,23 +87,23 @@ msgctxt "post author"
 msgid "by %s"
 msgstr ""
 
-#: inc/template-tags.php:83
+#: inc/template-tags.php:85
 msgid "Leave a comment"
 msgstr ""
 
-#: inc/template-tags.php:83
+#: inc/template-tags.php:87
 msgid "1 Comment"
 msgstr ""
 
-#: inc/template-tags.php:83
-msgid "% Comments"
+#: inc/template-tags.php:89
+msgid "%d Comments"
 msgstr ""
 
-#: inc/template-tags.php:90, template-parts/content-page.php:32
+#: inc/template-tags.php:97, template-parts/content-page.php:32
 msgid "Edit %s"
 msgstr ""
 
-#: inc/template-tags.php:116
+#: inc/template-tags.php:124
 msgid "LOAD MORE"
 msgstr ""
 

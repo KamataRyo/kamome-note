@@ -28,9 +28,6 @@ get_header();
 			<?php endif; ?>
 
 
-
-
-
 			<?php /* Start the Loop */ ?>
 			<?php while ( have_posts() ) : the_post(); ?>
 				<?php
@@ -44,8 +41,6 @@ get_header();
 			<?php endwhile; ?>
 			<?php kamome_note_load_more_navigation(); ?>
 			<?php /* finish the Loop */ ?>
-
-
 
 		<?php else : ?>
 			<?php get_template_part( 'template-parts/content', 'none' ); ?>

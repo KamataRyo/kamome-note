@@ -39,12 +39,8 @@ get_header();
 			<?php kamome_note_load_more_navigation(); ?>
 			<?php /* finish the Loop */ ?>
 
-
-
 		<?php else : ?>
-
 			<?php get_template_part( 'template-parts/content', 'none' ); ?>
-
 		<?php endif; ?>
 
 		</main><!-- #main -->

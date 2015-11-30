@@ -79,9 +79,16 @@ function kamome_note_tag_and_category( $post ) {
 	}
 
 	if ( ! is_single( $post ) && ! post_password_required( $post ) && ( comments_open( $post->ID ) || get_comments_number( $post->ID ) ) ) {
-		echo '<span class="comments-link">';
-		comments_popup_link( esc_html__( 'Leave a comment', 'kamome-note' ), esc_html__( '1 Comment', 'kamome-note' ), esc_html__( '% Comments', 'kamome-note' ) );
-		echo '</span>';
+		$comments_num = ( int )get_comments_number( $post->ID );
+		echo '<span class="comments-link"><a href="' . get_permalink( $post->ID ) . '#comments">';
+		if ( $comments_num === 0 ) {
+			echo esc_html__( 'Leave a comment', 'kamome-note' );
+		} elseif ( $comments_num === 1 ) {
+			echo esc_html__( '1 Comment', 'kamome-note' );
+		} else {
+			echo sprintf( esc_html__( '%d Comments', 'kamome-note' ), $comments_num );
+		}
+		echo '</a></span>';
 	}
 
 	edit_post_link(
@@ -91,7 +98,8 @@ function kamome_note_tag_and_category( $post ) {
 			'<span class="screen-reader-text">"' . $post->title . '"</span>'
 		),
 		'<span class="edit-link">',
-		'</span>'
+		'</span>',
+		$post->ID
 	);
 }
 endif;
@@ -119,7 +127,7 @@ function kamome_note_load_more_navigation() {
 
 
 function kamome_note_abbr_post( $post ) {
-	?>
+	// ?>
 	<article id="post-<?php $post->ID; ?>" <?php post_class( 'post-grid_wrapper', $post->ID ); ?>>
 		<header class="entry-header">
 			<?php echo sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink( $post->ID ) ) ) . esc_html( $post->post_title ) . '</a></h2>'; ?>
