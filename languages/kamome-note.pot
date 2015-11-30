@@ -87,32 +87,24 @@ msgctxt "post author"
 msgid "by %s"
 msgstr ""
 
-#: inc/template-tags.php:65, inc/template-tags.php:71
-msgid ", "
-msgstr ""
-
-#: inc/template-tags.php:67
-msgid "Posted in %1$s"
-msgstr ""
-
-#: inc/template-tags.php:73
-msgid "Tagged %1$s"
-msgstr ""
-
-#: inc/template-tags.php:79
+#: inc/template-tags.php:83
 msgid "Leave a comment"
 msgstr ""
 
-#: inc/template-tags.php:79
+#: inc/template-tags.php:83
 msgid "1 Comment"
 msgstr ""
 
-#: inc/template-tags.php:79
+#: inc/template-tags.php:83
 msgid "% Comments"
 msgstr ""
 
-#: inc/template-tags.php:86, template-parts/content-page.php:32
+#: inc/template-tags.php:90, template-parts/content-page.php:32
 msgid "Edit %s"
+msgstr ""
+
+#: inc/template-tags.php:116
+msgid "LOAD MORE"
 msgstr ""
 
 #: search.php:21

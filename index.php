@@ -27,27 +27,28 @@ get_header();
 				</header>
 			<?php endif; ?>
 
+
+
+
+
 			<?php /* Start the Loop */ ?>
-			<?php $count = 0; ?>
 			<?php while ( have_posts() ) : the_post(); ?>
-				<?php $count++; ?>
 				<?php
 					/*
 					 * Include the Post-Format-specific template for the content.
 					 * If you want to override this in a child theme, then include a file
 					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 					 */
-					get_template_part( 'template-parts/content', get_post_format() );
+					 kamome_note_abbr_post( $post );
 				?>
 			<?php endwhile; ?>
-			<p><a id="readmore">READ MORE</a></p>
-			<?php the_posts_navigation(); ?>
+			<?php kamome_note_load_more_navigation(); ?>
 			<?php /* finish the Loop */ ?>
 
+
+
 		<?php else : ?>
-
 			<?php get_template_part( 'template-parts/content', 'none' ); ?>
-
 		<?php endif; ?>
 
 		</main><!-- #main -->

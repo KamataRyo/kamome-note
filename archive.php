@@ -26,23 +26,19 @@ get_header();
 			</header><!-- .page-header -->
 
 			<?php /* Start the Loop */ ?>
-			<?php $count = 0; ?>
 			<?php while ( have_posts() ) : the_post(); ?>
-				<?php $count++; ?>
-				<?php kamome_note_open_grid_loop( $count ); ?>
 				<?php
 					/*
 					 * Include the Post-Format-specific template for the content.
 					 * If you want to override this in a child theme, then include a file
 					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 					 */
-					get_template_part( 'template-parts/content', get_post_format() );
+					 kamome_note_abbr_post( $post );
 				?>
-				<?php kamome_note_close_grid_loop( $count ); ?>
 			<?php endwhile; ?>
-			<?php kamome_note_close_grid_loop_terminator( $count ); ?>
-			<?php the_posts_navigation(); ?>
+			<?php kamome_note_load_more_navigation(); ?>
 			<?php /* finish the Loop */ ?>
+
 
 
 		<?php else : ?>

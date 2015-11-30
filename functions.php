@@ -157,38 +157,59 @@ define( 'KAMOME_NOTE_BOOTSTRAP_GRID_OF_SIDEBAR_COL', 'col-xs-12' );
 
 
 
+function kamome_note_ajax_acceptable_queries() {
+	return array(
+		//ajaxでload moreするために許すクエリ
+		//現状はこれ以外については考慮しない
+		'tag',
+		'category_name',
+		'paged',
+		'posts_per_page'
+	);
+}
+
+
+define( 'KAMOME_NOTE_AJAX_LOAD_MORE_ACTION', 'nonce field of ajax load more' );
 
 /**
- * return posts data.
+ * return posts data via AJAX.
  */
 function kamome_note_get_more_posts() {
 
-	if ( !isset( $_GET['count'] ) ) {
-		echo 'illegal get';
+	if ( ! isset($_GET['query']) || ! isset($_GET['count'] ) ) {
+		echo 'illegal request';
 		die();
 	}
-	$count = $_GET['count'];
-
-	$posts = get_posts( array(
-		'post_per_page' => 10,
-		'offset' => $count,
-		'post_status' => 'publish'
-	) );
-
-	global $wp_query;
-	$temp_query = $wp_query;
-	$args = array(
-		'post_per_page' => 10,
-		'offset' => $count,
-		'post_status' => 'publish'
-	);
-	query_posts( $args );
-	while ( have_posts() ) {
-		the_post();
-		get_template_part( 'template-parts/content', get_post_format() );
+	if (! is_main_query() || ! is_admin() ) {
+		echo 'illegal request';
+		die();
+	}
+	if ( isset( $_GET['nonce'] ) ) {
+		if ( ! wp_verify_nonce( $_GET['nonce'], KAMOME_NOTE_AJAX_LOAD_MORE_ACTION ) ) {
+		echo 'illegal request';
+		die();
+		}
 	}
 
-	$wp_query = $temp_query;
+	//create appropriate query for next page
+	$args = $_GET['query'];
+	// $args['offset'] = $_GET['count'];
+	if ( ! isset( $args['paged'] ) ) {
+		$args['paged'] = 1;
+	}
+	$args['paged'] = ( int )$args['paged'] + $_GET['count'] / $args['posts_per_page'];
+	$acceptable = kamome_note_ajax_acceptable_queries();
+
+	//filter query
+	foreach ($args as $key => $value) {
+		if ( ! in_array( $key, $acceptable ) && isset( $args[ $key ] ) ) {
+			unset( $args[$key] );
+		}
+	}
+	$posts = get_posts( $args );
+	foreach ( $posts as $post ) {
+		kamome_note_abbr_post( $post );
+	}
 	die();
 }
 add_action('wp_ajax_kamome_note_get_more_posts', 'kamome_note_get_more_posts');
@@ -198,12 +219,21 @@ add_action('wp_ajax_nopriv_kamome_note_get_more_posts', 'kamome_note_get_more_po
  * localize ajax endpoint url.
  */
 function kamome_note_localize_ajax_endpoint() {
-	wp_localize_script( KAMOME_NOTE_MAIN_SCRIPT_HANDLE, 'READMORE', array(
+	wp_localize_script( KAMOME_NOTE_MAIN_SCRIPT_HANDLE, 'LOADMORE', array(
 		'endpoint' => admin_url( 'admin-ajax.php' ),
-		'action'   => 'kamome_note_get_more_posts'
+		'action'   => 'kamome_note_get_more_posts',
 	) );
 }
 add_action( 'wp_enqueue_scripts', 'kamome_note_localize_ajax_endpoint' );
+
+
+
+
+
+
+
+
+
 
 
 

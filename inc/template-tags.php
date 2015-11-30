@@ -11,27 +11,27 @@ if ( ! function_exists( 'kamome_note_posted_on' ) ) :
 /**
  * Prints HTML with meta information for the current post-date/time and author.
  */
-function kamome_note_posted_on() {
+function kamome_note_posted_on( $post ) {
 	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
-	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+	if ( $post->post_date !== $post->post_modified ) {
 		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
 	}
 
 	$time_string = sprintf( $time_string,
-		esc_attr( get_the_date( 'c' ) ),
-		esc_html( get_the_date() ),
-		esc_attr( get_the_modified_date( 'c' ) ),
-		esc_html( get_the_modified_date() )
+		esc_attr( get_the_date( 'c', $post->ID ) ),
+		esc_html( get_the_date( get_option('date_format'), $post->ID ) ),
+		esc_attr( get_the_modified_date( 'c', $post->ID ) ),
+		esc_html( get_the_modified_date( get_option('date_format'), $post->ID ) )
 	);
 
 	$posted_on = sprintf(
 		esc_html_x( 'Posted on %s', 'post date', 'kamome-note' ),
-		'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
+		'<a href="' . esc_url( get_permalink( $post->ID ) ) . '" rel="bookmark">' . $time_string . '</a>'
 	);
 
 	$byline = sprintf(
 		esc_html_x( 'by %s', 'post author', 'kamome-note' ),
-		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
+		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID', $post->post_author ) ) ) . '">' . esc_html( get_the_author_meta( 'user_nicename', $post->post_author ) ) . '</a></span>'
 	);
 
 	echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
@@ -44,9 +44,9 @@ if ( ! function_exists( 'kamome_note_thumbnail' ) ) :
 /**
  * Prints post thumbnail or noimage if not exist.
  */
-function kamome_note_post_thumbnail() {
-	if ( has_post_thumbnail() ) {
-		the_post_thumbnail();
+function kamome_note_post_thumbnail( $post ) {
+	if ( has_post_thumbnail( $post->ID ) ) {
+		echo get_the_post_thumbnail( $post->ID );
 	} else {
 		echo '<img src="' . get_template_directory_uri() . '/img/noimage.png' . '" />';
 	}
@@ -58,23 +58,27 @@ if ( ! function_exists( 'kamome_note_tag_and_category' ) ) :
 /**
  * Prints HTML with meta information for the categories, tags and comments.
  */
-function kamome_note_tag_and_category() {
+function kamome_note_tag_and_category( $post ) {
 	// Hide category and tag text for pages.
-	if ( 'post' === get_post_type() ) {
-		/* translators: used between list items, there is a space after the comma */
-		$categories_list = get_the_category_list( esc_html__( ', ', 'kamome-note' ) );
-		if ( $categories_list && kamome_note_categorized_blog() ) {
-			printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'kamome-note' ) . '</span>', $categories_list ); // WPCS: XSS OK.
-		}
-
-		/* translators: used between list items, there is a space after the comma */
-		$tags_list = get_the_tag_list( '', esc_html__( ', ', 'kamome-note' ) );
-		if ( $tags_list ) {
-			printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'kamome-note' ) . '</span>', $tags_list ); // WPCS: XSS OK.
+	if ( 'post' === $post->post_type ) {
+		$taxonomies = array( 'category', 'post_tag' );
+		foreach ($taxonomies as $taxonomy) {
+			$terms = wp_get_post_terms( $post->ID, $taxonomy );
+			if ( empty( $terms ) ) {
+				continue;
+			}
+			echo '<span>' . get_taxonomy( $taxonomy )->label . '</span>';
+			echo "<ul class=\"${taxonomy}\">";
+			foreach ( $terms as $term ) {
+				echo '<li><a href="' . get_term_link( $term, $taxonomy ) . '">';
+				echo esc_html( $term->name );
+				echo '</a></li>';
+			}
+			echo '</ul>';
 		}
 	}
 
-	if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+	if ( ! is_single( $post ) && ! post_password_required( $post ) && ( comments_open( $post->ID ) || get_comments_number( $post->ID ) ) ) {
 		echo '<span class="comments-link">';
 		comments_popup_link( esc_html__( 'Leave a comment', 'kamome-note' ), esc_html__( '1 Comment', 'kamome-note' ), esc_html__( '% Comments', 'kamome-note' ) );
 		echo '</span>';
@@ -84,7 +88,7 @@ function kamome_note_tag_and_category() {
 		sprintf(
 			/* translators: %s: Name of current post */
 			esc_html__( 'Edit %s', 'kamome-note' ),
-			the_title( '<span class="screen-reader-text">"', '"</span>', false )
+			'<span class="screen-reader-text">"' . $post->title . '"</span>'
 		),
 		'<span class="edit-link">',
 		'</span>'
@@ -92,45 +96,41 @@ function kamome_note_tag_and_category() {
 }
 endif;
 
-/**
- * Returns true if a blog has more than 1 category.
- *
- * @return bool
- */
-function kamome_note_categorized_blog() {
-	if ( false === ( $all_the_cool_cats = get_transient( 'kamome_note_categories' ) ) ) {
-		// Create an array of all the categories that are attached to posts.
-		$all_the_cool_cats = get_categories( array(
-			'fields'     => 'ids',
-			'hide_empty' => 1,
-			// We only need to know if there is more than one category.
-			'number'     => 2,
-		) );
 
-		// Count the number of categories that are attached to the posts.
-		$all_the_cool_cats = count( $all_the_cool_cats );
 
-		set_transient( 'kamome_note_categories', $all_the_cool_cats );
+
+
+function kamome_note_load_more_navigation() {
+
+	$args = kamome_note_ajax_acceptable_queries();//defined in functions.php
+	$query = array();
+	//filter the query
+	foreach ( $args as $arg ) {
+		$var = get_query_var( $arg );
+		if ( $var ) {
+			$query[$arg] = get_query_var( $arg );
+		}
 	}
-
-	if ( $all_the_cool_cats > 1 ) {
-		// This blog has more than 1 category so kamome_note_categorized_blog should return true.
-		return true;
-	} else {
-		// This blog has only 1 category so kamome_note_categorized_blog should return false.
-		return false;
-	}
+	printf('<p id="end-of-articles" type="hidden" data-query="%s">',esc_attr( json_encode ( $query ) ) );
+	wp_nonce_field( KAMOME_NOTE_AJAX_LOAD_MORE_ACTION,'ajax-nonce' ,false ,true );
+	printf('<a id="loadmore-button">%s</a>', esc_html__( 'LOAD MORE', 'kamome-note' ) );
+	echo '</p>';
 }
 
-/**
- * Flush out the transients used in kamome_note_categorized_blog.
- */
-function kamome_note_category_transient_flusher() {
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return;
-	}
-	// Like, beat it. Dig?
-	delete_transient( 'kamome_note_categories' );
+
+function kamome_note_abbr_post( $post ) {
+	?>
+	<article id="post-<?php $post->ID; ?>" <?php post_class( 'post-grid_wrapper', $post->ID ); ?>>
+		<header class="entry-header">
+			<?php echo sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink( $post->ID ) ) ) . esc_html( $post->post_title ) . '</a></h2>'; ?>
+			<?php if ( 'post' === $post->post_type ) : ?>
+			<div class="entry-meta">
+				<p><?php kamome_note_posted_on( $post ); ?></p>
+				<p><?php kamome_note_post_thumbnail( $post ); ?></p>
+				<p><?php kamome_note_tag_and_category( $post ); ?></p>
+			</div><!-- .entry-meta -->
+			<?php endif; ?>
+		</header><!-- .entry-header -->
+	</article><!-- #post-## -->
+	<?php
 }
-add_action( 'edit_category', 'kamome_note_category_transient_flusher' );
-add_action( 'save_post',     'kamome_note_category_transient_flusher' );
