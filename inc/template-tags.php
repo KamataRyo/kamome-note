@@ -80,7 +80,7 @@ function kamome_note_tag_and_category( $post ) {
 
 	if ( ! is_single( $post ) && ! post_password_required( $post ) && ( comments_open( $post->ID ) || get_comments_number( $post->ID ) ) ) {
 		$comments_num = ( int )get_comments_number( $post->ID );
-		echo '<span class="comments-link"><a href="' . get_permalink( $post->ID ) . '#comments">';
+		echo '<p class="comments-link"><a href="' . get_permalink( $post->ID ) . '#comments">';
 		if ( $comments_num === 0 ) {
 			echo esc_html__( 'Leave a comment', 'kamome-note' );
 		} elseif ( $comments_num === 1 ) {
@@ -88,7 +88,7 @@ function kamome_note_tag_and_category( $post ) {
 		} else {
 			echo sprintf( esc_html__( '%d Comments', 'kamome-note' ), $comments_num );
 		}
-		echo '</a></span>';
+		echo '</a></p>';
 	}
 
 	edit_post_link(
@@ -108,7 +108,7 @@ endif;
 
 
 
-function kamome_note_load_more_navigation() {
+function kamome_note_load_more_navigation( $stickies ) {
 
 	$args = kamome_note_ajax_acceptable_queries();//defined in functions.php
 	$query = array();
@@ -119,7 +119,12 @@ function kamome_note_load_more_navigation() {
 			$query[$arg] = get_query_var( $arg );
 		}
 	}
-	printf('<p id="end-of-articles" type="hidden" data-query="%s">',esc_attr( json_encode ( $query ) ) );
+	if (! isset( $query['paged'] ) ) {
+		$query['paged'] = 1;
+	}
+
+	printf( '<p id="end-of-articles" data-query="%s">',esc_attr( json_encode ( $query ) ) );
+	printf( '<input type="hidden" id="ids_of_stickies" value="%s">', json_encode( $stickies ) );
 	wp_nonce_field( KAMOME_NOTE_AJAX_LOAD_MORE_ACTION,'ajax-nonce' ,false ,true );
 	printf('<a id="loadmore-button">%s</a>', esc_html__( 'LOAD MORE', 'kamome-note' ) );
 	echo '</p>';

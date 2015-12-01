@@ -159,15 +159,13 @@ define( 'KAMOME_NOTE_BOOTSTRAP_GRID_OF_SIDEBAR_COL', 'col-xs-12' );
 
 function kamome_note_ajax_acceptable_queries() {
 	return array(
-		//ajaxでload moreするために許すクエリ
-		//現状はこれ以外については考慮しない
+		//acceptable queries in ajax load more
+		'posts_per_page',//must
+		'paged',//must
 		'tag',
 		'category_name',
-		'paged',
-		'posts_per_page'
 	);
 }
-
 
 define( 'KAMOME_NOTE_AJAX_LOAD_MORE_ACTION', 'nonce field of ajax load more' );
 
@@ -175,40 +173,34 @@ define( 'KAMOME_NOTE_AJAX_LOAD_MORE_ACTION', 'nonce field of ajax load more' );
  * return posts data via AJAX.
  */
 function kamome_note_get_more_posts() {
-
-	if ( ! isset($_GET['query']) || ! isset($_GET['count'] ) ) {
+	if (! is_admin() ) {
 		echo 'illegal request';
 		die();
 	}
-	if (! is_main_query() || ! is_admin() ) {
+	if ( ! isset($_GET['query']) || ! isset($_GET['stickies'] ) || ! isset($_GET['nonce'] ) ) {
 		echo 'illegal request';
 		die();
 	}
-	if ( isset( $_GET['nonce'] ) ) {
-		if ( ! wp_verify_nonce( $_GET['nonce'], KAMOME_NOTE_AJAX_LOAD_MORE_ACTION ) ) {
+	if ( ! wp_verify_nonce( $_GET['nonce'], KAMOME_NOTE_AJAX_LOAD_MORE_ACTION ) ) {
 		echo 'illegal request';
 		die();
-		}
 	}
-
-	//create appropriate query for next page
 	$args = $_GET['query'];
-	// $args['offset'] = $_GET['count'];
-	if ( ! isset( $args['paged'] ) ) {
-		$args['paged'] = 1;
-	}
-	$args['paged'] = ( int )$args['paged'] + $_GET['count'] / $args['posts_per_page'];
-	$acceptable = kamome_note_ajax_acceptable_queries();
-
 	//filter query
+	$acceptable = kamome_note_ajax_acceptable_queries();
 	foreach ($args as $key => $value) {
 		if ( ! in_array( $key, $acceptable ) && isset( $args[ $key ] ) ) {
 			unset( $args[$key] );
 		}
 	}
+
+	$args['paged'] = ( int )( $args['paged'] ) + 1;
 	$posts = get_posts( $args );
 	foreach ( $posts as $post ) {
-		kamome_note_abbr_post( $post );
+		if ( ! in_array( $post->ID, json_decode( $_GET['stickies'] ) ) ) {
+			//stickies must already displayed, should be skipped.
+			kamome_note_abbr_post( $post );
+		}
 	}
 	die();
 }

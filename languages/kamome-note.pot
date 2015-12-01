@@ -103,7 +103,7 @@ msgstr ""
 msgid "Edit %s"
 msgstr ""
 
-#: inc/template-tags.php:124
+#: inc/template-tags.php:129
 msgid "LOAD MORE"
 msgstr ""
 

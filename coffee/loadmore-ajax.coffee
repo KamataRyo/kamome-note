@@ -2,11 +2,12 @@ jQuery().ready ($) ->
     $('#loadmore-button').click () ->
         url = LOADMORE.endpoint
         query =
-            action: LOADMORE.action
-            query: $('#end-of-articles').data 'query'
-            count: $('#main>article').length - $('#main>article.sticky').length
-            nonce: $('#ajax-nonce').val()
-        console.log url,query
+            action:   LOADMORE.action
+            query:    $('#end-of-articles').data 'query'
+            stickies: $('#ids_of_stickies').val()
+            nonce:    $('#ajax-nonce').val()
         $.get url, query, (res)->
-            console.log res
-            $('#end-of-articles').before $ res
+            query.query.paged++;
+            $('#end-of-articles')
+                .before $ res
+                .data 'query', query.query
