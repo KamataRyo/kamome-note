@@ -123,8 +123,11 @@ function kamome_note_load_more_navigation( $stickies ) {
 		$query['paged'] = 1;
 	}
 
+	global $wp_query;
+
 	printf( '<p id="end-of-articles" data-query="%s">',esc_attr( json_encode ( $query ) ) );
 	printf( '<input type="hidden" id="ids_of_stickies" value="%s">', json_encode( $stickies ) );
+	printf( '<input type="hidden" id="published_posts" value="%s">', $wp_query->found_posts );
 	wp_nonce_field( KAMOME_NOTE_AJAX_LOAD_MORE_ACTION,'ajax-nonce' ,false ,true );
 	printf('<a id="loadmore-button">%s</a>', esc_html__( 'LOAD MORE', 'kamome-note' ) );
 	echo '</p>';

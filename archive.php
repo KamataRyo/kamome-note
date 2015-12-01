@@ -26,6 +26,7 @@ get_header();
 			</header><!-- .page-header -->
 
 			<?php /* Start the Loop */ ?>
+			<?php $stickies = array(); ?>
 			<?php while ( have_posts() ) : the_post(); ?>
 				<?php
 					/*
@@ -34,10 +35,14 @@ get_header();
 					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 					 */
 					 kamome_note_abbr_post( $post );
+					 if ( is_sticky( $post->ID ) ) {
+						 array_push( $stickies, $post->ID );
+					 };
 				?>
 			<?php endwhile; ?>
-			<?php kamome_note_load_more_navigation(); ?>
+			<?php kamome_note_load_more_navigation( $stickies ); ?>
 			<?php /* finish the Loop */ ?>
+
 
 		<?php else : ?>
 			<?php get_template_part( 'template-parts/content', 'none' ); ?>

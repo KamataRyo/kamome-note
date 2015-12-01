@@ -1,4 +1,11 @@
-jQuery().ready ($) ->
+jQuery().ready ($)->
+
+    checkAndHide = ()->
+        if $('#main>article').length >= parseInt($('#published_posts').val(), 10)
+            $('#loadmore-button').css 'display', 'none'
+
+    checkAndHide()
+
     $('#loadmore-button').click () ->
         url = LOADMORE.endpoint
         query =
@@ -11,3 +18,4 @@ jQuery().ready ($) ->
             $('#end-of-articles')
                 .before $ res
                 .data 'query', query.query
+                checkAndHide()
