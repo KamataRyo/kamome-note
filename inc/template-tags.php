@@ -67,10 +67,10 @@ function kamome_note_tag_and_category( $post ) {
 			if ( empty( $terms ) ) {
 				continue;
 			}
-			echo '<span>' . get_taxonomy( $taxonomy )->label . '</span>';
-			echo "<ul class=\"${taxonomy}\">";
+			echo '<h3 class="taxonomy-title">' . get_taxonomy( $taxonomy )->label . '</h3>';
+			echo "<ul class=\"taxonomy-list ${taxonomy}\">";
 			foreach ( $terms as $term ) {
-				echo '<li><a href="' . get_term_link( $term, $taxonomy ) . '">';
+				echo '<li class="taxonomy-list-item"><a href="' . get_term_link( $term, $taxonomy ) . '">';
 				echo esc_html( $term->name );
 				echo '</a></li>';
 			}
@@ -136,17 +136,17 @@ function kamome_note_load_more_navigation( $stickies ) {
 
 function kamome_note_abbr_post( $post ) {
 	// ?>
-	<article id="post-<?php $post->ID; ?>" <?php post_class( 'post-grid_wrapper', $post->ID ); ?>>
+	<article id="post-<?php echo $post->ID; ?>" <?php post_class( 'post-grid_wrapper', $post->ID ); ?>>
 		<header class="entry-header">
 			<?php echo sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink( $post->ID ) ) ) . esc_html( $post->post_title ) . '</a></h2>'; ?>
 			<?php if ( 'post' === $post->post_type ) : ?>
 			<div class="entry-meta">
-				<p><?php kamome_note_posted_on( $post ); ?></p>
-				<p><?php kamome_note_post_thumbnail( $post ); ?></p>
-				<p><?php kamome_note_tag_and_category( $post ); ?></p>
+				<?php kamome_note_posted_on( $post ); ?>
+				<?php kamome_note_tag_and_category( $post ); ?>
 			</div><!-- .entry-meta -->
 			<?php endif; ?>
 		</header><!-- .entry-header -->
+		<?php kamome_note_post_thumbnail( $post ); ?>
 	</article><!-- #post-## -->
 	<?php
 }

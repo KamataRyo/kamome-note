@@ -47,8 +47,7 @@
 
 			</div><!--.col-->
 		</div><!--.row-->
-	</div><!--.container-->
 
-	<div class="container">
+
 		<div class="row">
 			<div id="content" class="site-content">

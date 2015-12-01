@@ -22,6 +22,9 @@ body {
     height: $header_height;
     background-repeat: no-repeat;
     background-position:center;
+    background-attachment: fixed;
+    background-position: top;
+
     margin-bottom: $article_gap;
     .site-title {
         display: inline-block;
@@ -38,14 +41,66 @@ body {
 
 
 .contents-grid_wrapper {
+    text-align: center;
 }
 
 .post-grid_wrapper {
+    position: relative;
+	overflow: hidden;
+	width: 300px;
+    @media only screen and (max-width: 620px) {
+        width: auto;
+    }
+    color:$c1;
+    a {
+        color:$c1;
+    }
+    .entry-header {
+        padding: 10px;
+        position: absolute;
+        text-align:left;
+    	top: 0;
+    	left: 0;
+    	z-index: 2;
+    	width: 100%;
+    	height: 100%;
+    	background: rgba($c5,.6);
+    	-webkit-transition: .3s;
+    	transition: .3s;
+    	opacity: 0;
+        &:hover {
+            opacity:1;
+        }
+        @media only screen and (max-width: 800px) {
+            opacity:0.6;
+        }
+        .entry-title {
+            margin:0;
+            font-size:20px;
+        }
+    }
+
+
+    display: inline-block;
     background-color: $c3;
-    border: $article_gap solid $c1;
-    @include border-radius(15px);
     margin: 0;
+    .taxonomy-title {
+        display: none;
+    }
+    ul.taxonomy-list {
+        li.taxonomy-list-item {
+            display:inline;
+            &+li.taxonomy-list-item {
+                margin-left: 5px;
+            }
+        }
+        margin-left: 0;
+        padding-left: 0;
+        list-style: none;
+    }
 }
+
+
 
 .sidebar-grid_wrapper {
     padding: 0;
@@ -60,6 +115,7 @@ body {
             padding: 2px 8px;
             margin: 4px;
             background-color: $c2;
+            border: 1px solid $c5;
             @include border-radius(20px);
             list-style: none;
         }
