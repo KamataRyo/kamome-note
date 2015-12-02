@@ -71,7 +71,7 @@ body {
         &:hover {
             opacity:1;
         }
-        @media only screen and (max-width: 800px) {
+        @media only screen and (max-width: 767px) {
             opacity:0.6;
         }
         .entry-title {
@@ -79,7 +79,6 @@ body {
             font-size:20px;
         }
     }
-
 
     display: inline-block;
     background-color: $c3;
@@ -99,7 +98,11 @@ body {
         list-style: none;
     }
 }
-
+.post-grid_wrapper.no-thumb {
+    .entry-header {
+        opacity:1;
+    }
+}
 
 
 .sidebar-grid_wrapper {
