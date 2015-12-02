@@ -77,33 +77,23 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: inc/template-tags.php:28
-msgctxt "post date"
-msgid "Posted on %s"
-msgstr ""
-
-#: inc/template-tags.php:33
-msgctxt "post author"
-msgid "by %s"
-msgstr ""
-
-#: inc/template-tags.php:85
+#: inc/template-tags.php:88
 msgid "Leave a comment"
 msgstr ""
 
-#: inc/template-tags.php:87
+#: inc/template-tags.php:90
 msgid "1 Comment"
 msgstr ""
 
-#: inc/template-tags.php:89
+#: inc/template-tags.php:92
 msgid "%d Comments"
 msgstr ""
 
-#: inc/template-tags.php:97, template-parts/content-page.php:32
+#: inc/template-tags.php:100, template-parts/content-page.php:32
 msgid "Edit %s"
 msgstr ""
 
-#: inc/template-tags.php:132
+#: inc/template-tags.php:135
 msgid "LOAD MORE"
 msgstr ""
 

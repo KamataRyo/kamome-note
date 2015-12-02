@@ -14,8 +14,8 @@ jQuery().ready ($)->
             stickies: $('#ids_of_stickies').val()
             nonce:    $('#ajax-nonce').val()
         $.get url, query, (res)->
-            query.query.paged++;
+            query.query.paged++;#次ページにする
             $('#end-of-articles')
-                .before $ res
-                .data 'query', query.query
-                checkAndHide()
+                    .before $ res
+                    .data 'query', query.query
+                    checkAndHide()

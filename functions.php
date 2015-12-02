@@ -221,11 +221,30 @@ add_action( 'wp_enqueue_scripts', 'kamome_note_localize_ajax_endpoint' );
 
 
 
+define( 'KAMOME_NOTE_CLIP_RATE', 1.414 );
+if ( ! function_exists( 'kamome_note_get_grid_size_class' ) ) {
+	/**
+	 * numerical size to grid size
+	 */
+	function kamome_note_get_image_clip_class ( $path ) {
+		$size = getimagesize( $path );
+		$aspect_ratio = $size[0] / $size[1];
+		$result = array(
+			'vertical'   => 'thumbnail-vertical_clip',
+			'square'     => 'thumbnail-square_clip',
+			'horizontal' => 'thumbnail-horizontal_clip',
+		);
 
 
-
-
-
+		if ( $aspect_ratio <= KAMOME_NOTE_CLIP_RATE / 2 ) {
+			return $result['vertical'];
+		} elseif ( $aspect_ratio >= KAMOME_NOTE_CLIP_RATE * 2 ) {
+			return $result['horizontal'];
+		} else {
+			return $result['square'];
+		}
+	}
+}
 
 
 

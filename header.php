@@ -41,8 +41,9 @@
 							<p class="site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
 						<?php endif; ?>
 					</div><!-- .site-branding -->
-					<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
-
+					<div class="header-menu">
+						<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
+					</div>
 				</header><!-- #masthead -->
 
 			</div><!--.col-->

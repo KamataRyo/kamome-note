@@ -24,17 +24,11 @@ function kamome_note_posted_on( $post ) {
 		esc_html( get_the_modified_date( get_option('date_format'), $post->ID ) )
 	);
 
-	$posted_on = sprintf(
-		esc_html_x( 'Posted on %s', 'post date', 'kamome-note' ),
-		'<a href="' . esc_url( get_permalink( $post->ID ) ) . '" rel="bookmark">' . $time_string . '</a>'
-	);
+	$posted_on = '<a href="' . esc_url( get_permalink( $post->ID ) ) . '" rel="bookmark">' . $time_string . '</a>';
+	$byline = '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID', $post->post_author ) ) ) . '">' . esc_html( get_the_author_meta( 'user_nicename', $post->post_author ) ) . '</a></span>';
 
-	$byline = sprintf(
-		esc_html_x( 'by %s', 'post author', 'kamome-note' ),
-		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID', $post->post_author ) ) ) . '">' . esc_html( get_the_author_meta( 'user_nicename', $post->post_author ) ) . '</a></span>'
-	);
-
-	echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
+	echo '<span class="posted-on"><i class="post-meta glyphicon glyphicon-time"></i>' . $posted_on . '</span>'; // WPCS: XSS OK.
+	echo '<span class="byline"><i class="post-meta glyphicon glyphicon-user"></i>' . $byline . '</span>'; // WPCS: XSS OK.
 
 }
 endif;
@@ -46,9 +40,12 @@ if ( ! function_exists( 'kamome_note_thumbnail' ) ) :
  */
 function kamome_note_post_thumbnail( $post ) {
 	if ( has_post_thumbnail( $post->ID ) ) {
-		echo get_the_post_thumbnail( $post->ID );
+		echo get_the_post_thumbnail( $post->ID, '', array(
+			'class' => kamome_note_get_image_clip_class( get_attached_file( get_post_thumbnail_id( $post->ID ) ) )
+		) );
 	} else {
-		echo '<img src="' . get_template_directory_uri() . '/img/noimage.png' . '" />';
+		$class = kamome_note_get_image_clip_class( get_template_directory() . '/img/noimage.png');
+		echo '<img src="' . get_template_directory_uri() . '/img/noimage.png' . '" class="' . esc_attr( $class ) . '" alt="noimage" />';
 	}
 }
 endif;
@@ -60,17 +57,23 @@ if ( ! function_exists( 'kamome_note_tag_and_category' ) ) :
  */
 function kamome_note_tag_and_category( $post ) {
 	// Hide category and tag text for pages.
+	$taxonomies = array(
+		'category' => 'glyphicon glyphicon-folder-open',
+		'post_tag' => 'glyphicon glyphicon-tag'
+	);
 	if ( 'post' === $post->post_type ) {
-		$taxonomies = array( 'category', 'post_tag' );
-		foreach ($taxonomies as $taxonomy) {
-			$terms = wp_get_post_terms( $post->ID, $taxonomy );
+		#$taxonomies = array( 'category', 'post_tag' );
+
+		foreach ( $taxonomies as $taxonomy => $icon_class ) {
+			$terms = wp_get_post_terms( $post->ID, $taxonomy);
 			if ( empty( $terms ) ) {
 				continue;
 			}
-			echo '<h3 class="taxonomy-title">' . get_taxonomy( $taxonomy )->label . '</h3>';
+			echo '<h3 class="taxonomy-title">' . get_taxonomy( $taxonomy)->label . '</h3>';
 			echo "<ul class=\"taxonomy-list ${taxonomy}\">";
+			printf('<i class="post-meta %s"></i>', $icon_class );
 			foreach ( $terms as $term ) {
-				echo '<li class="taxonomy-list-item"><a href="' . get_term_link( $term, $taxonomy ) . '">';
+				echo '<li class="taxonomy-list-item"><a href="' . get_term_link( $term, $taxonomy) . '">';
 				echo esc_html( $term->name );
 				echo '</a></li>';
 			}
@@ -80,7 +83,7 @@ function kamome_note_tag_and_category( $post ) {
 
 	if ( ! is_single( $post ) && ! post_password_required( $post ) && ( comments_open( $post->ID ) || get_comments_number( $post->ID ) ) ) {
 		$comments_num = ( int )get_comments_number( $post->ID );
-		echo '<p class="comments-link"><a href="' . get_permalink( $post->ID ) . '#comments">';
+		echo '<p class="comments-link"><i class="post-meta glyphicon glyphicon-pencil"></i><a href="' . get_permalink( $post->ID ) . '#comments">';
 		if ( $comments_num === 0 ) {
 			echo esc_html__( 'Leave a comment', 'kamome-note' );
 		} elseif ( $comments_num === 1 ) {
@@ -97,7 +100,7 @@ function kamome_note_tag_and_category( $post ) {
 			esc_html__( 'Edit %s', 'kamome-note' ),
 			'<span class="screen-reader-text">"' . $post->title . '"</span>'
 		),
-		'<span class="edit-link">',
+		'<span class="edit-link"><i class="post-meta glyphicon glyphicon-wrench"></i>',
 		'</span>',
 		$post->ID
 	);

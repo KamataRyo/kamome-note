@@ -1,8 +1,8 @@
 /*kamome-note sass*/
 @import "compass/css3/border-radius";
+@import "compass/css3/images";
 
-
-$header_height: 300px;
+$header_height: 360px;
 $article_gap: 10px;
 $c1: #CFD5DF;
 $c2: #A1BFE3;
@@ -10,21 +10,34 @@ $c3: #8BB0DE;
 $c4: #639DE1;
 $c5: #6E7C92;
 
+@mixin kamome-note-button-effect($border: 1px) {
+    border:$border solid $c5;
+    color:$c5;
+    -webkit-transition: .1s;
+    transition: .1s;
+    &:hover {
+        cursor:pointer;
+        background-color: $c5;
+        color: $c1;
+    }
+}
 
 html {
-    font-size: 12px;
+    font-size: 14px;
 }
 body {
     background-color: $c1;
+    font-weight:200;
 }
 
 .header-row {
+    position: relative;
     height: $header_height;
     background-repeat: no-repeat;
     background-position:center;
     background-attachment: fixed;
-    background-position: top;
-
+    background-position: top center;
+    overflow: hidden;
     margin-bottom: $article_gap;
     .site-title {
         display: inline-block;
@@ -38,15 +51,53 @@ body {
         }
     }
 }
+div.site-branding {
+    color: $c5;
+    font-size:1em;
+    a {
+        color: inherit;
+    }
+}
+div.header-menu {
+    position: absolute;
+    padding-top: 5px;
+    width: 100%;
+    height: $header_height - 30px;//h1 line diff
+    display: block;
+    overflow: scroll;
+    ul {
+        margin-left: 1em;
+        list-style: none;
+    }
+    a {
+        padding: .4em;
+        &:hover {
+            @include border-radius(8px);
+            text-decoration: none;
+        }
+        @include kamome-note-button-effect(0);
+    }
+}
 
 
 .contents-grid_wrapper {
-    text-align: center;
 }
+
+
+
+
+a#loadmore-button {
+    display: block;
+    text-decoration: none;
+    padding: 1em;
+    margin:3em 6em;
+    @include border-radius(20px);
+    @include kamome-note-button-effect();
+}
+
 
 .post-grid_wrapper {
     position: relative;
-	overflow: hidden;
 	width: 300px;
     @media only screen and (max-width: 620px) {
         width: auto;
@@ -56,6 +107,7 @@ body {
         color:$c1;
     }
     .entry-header {
+        overflow: scroll;
         padding: 10px;
         position: absolute;
         text-align:left;
@@ -65,8 +117,8 @@ body {
     	width: 100%;
     	height: 100%;
     	background: rgba($c5,.6);
-    	-webkit-transition: .3s;
-    	transition: .3s;
+    	-webkit-transition: .2s;
+    	transition: .2s;
     	opacity: 0;
         &:hover {
             opacity:1;
@@ -75,14 +127,13 @@ body {
             opacity:0.6;
         }
         .entry-title {
-            margin:0;
             font-size:20px;
         }
     }
 
     display: inline-block;
     background-color: $c3;
-    margin: 0;
+    margin-bottom: 5px;
     .taxonomy-title {
         display: none;
     }
@@ -98,6 +149,7 @@ body {
         list-style: none;
     }
 }
+
 .post-grid_wrapper.no-thumb {
     .entry-header {
         opacity:1;
@@ -117,15 +169,45 @@ body {
             display: inline-block;
             padding: 2px 8px;
             margin: 4px;
-            background-color: $c2;
-            border: 1px solid $c5;
-            @include border-radius(20px);
             list-style: none;
+            @include border-radius(20px);
+            @include kamome-note-button-effect();
+            a {
+                color: inherit;
+            }
         }
     }
 }
 
 .footer-row {
-    background-color: $c5;
+    color: $c5;
+    font-size:.8em;
+    a{
+        color: inherit;
+    }
     padding:10px 0 20px 0;
+}
+
+
+
+//post index
+span.posted-on {
+    display:block;
+}
+span.byline {
+    display:block;
+}
+ul.taxonomy-list{
+    display:block;
+    margin-bottom:0;
+}
+li.taxonomy-list-item {
+    display:inline;
+}
+p.comments-link {
+    margin-bottom: 0;
+}
+i.post-meta {
+    display:inline;
+    margin-right: 7px;
 }
