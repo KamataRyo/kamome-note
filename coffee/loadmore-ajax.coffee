@@ -1,8 +1,7 @@
 jQuery().ready ($)->
-
     checkAndHide = ()->
-        if $('#main>article').length >= parseInt($('#published_posts').val(), 10)
-            $('#loadmore-button').css 'display', 'none'
+        if $('#main article').length >= parseInt($('#published_posts').val(), 10)
+            $('#loadmore-button').fadeOut 300
 
     checkAndHide()
 
@@ -18,4 +17,4 @@ jQuery().ready ($)->
             $('#end-of-articles')
                     .before $ res
                     .data 'query', query.query
-                    checkAndHide()
+            checkAndHide()
