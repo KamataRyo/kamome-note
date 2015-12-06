@@ -2,7 +2,7 @@
 @import "compass/css3/border-radius";
 @import "compass/css3/images";
 
-$header_height: 360px;
+$header_height: 320px;
 $article_gap: 10px;
 $c1: #CFD5DF;
 $c2: #A1BFE3;
@@ -17,7 +17,7 @@ $c5: #6E7C92;
     transition: .1s;
     &:hover {
         cursor:pointer;
-        background-color: $c5;
+        background-color:$c5;
         color: $c1;
     }
 }
@@ -60,22 +60,31 @@ div.site-branding {
 }
 div.header-menu {
     position: absolute;
+    display:inline;
     padding-top: 5px;
-    width: 100%;
+    width: auto;
     height: $header_height - 30px;//h1 line diff
-    display: block;
     overflow: scroll;
+    margin-left:4em;
+    &::-webkit-scrollbar {
+        display:none;
+    }
     ul {
-        margin-left: 1em;
+        margin-left: 0;
         list-style: none;
+        &#menu-all-pages {
+            padding-left: 0;
+        }
     }
     a {
+        @include border-radius(8px);
+        text-decoration: none;
         padding: .4em;
-        &:hover {
-            @include border-radius(8px);
-            text-decoration: none;
-        }
         @include kamome-note-button-effect(0);
+        &:hover {
+            //override button effect
+            background-color:rgba($c5,.5);
+        }
     }
 }
 
@@ -91,19 +100,22 @@ div.header-menu {
 
 .post-grid_wrapper {
     position: relative;
-	width: 320px;
-    height:210px;
+	width: 200px;
+    height:200px;
     overflow: hidden;
-    background-color: black;
-    @media only screen and (max-width: 620px) {
-        width: auto;
-    }
+    background-color: $c5;
+    // @media only screen and (max-width: 20px) {
+    //     width: 100%;
+    // }
     color:$c1;
     a {
         color:$c1;
     }
     .entry-header {
         overflow: scroll;
+        &::-webkit-scrollbar {
+            display:none;
+        }
         padding: 10px;
         position: absolute;
         text-align:left;
@@ -188,6 +200,9 @@ a#loadmore-button {
             list-style: none;
             @include border-radius(20px);
             @include kamome-note-button-effect();
+            &:hover {
+                cursor:auto;
+            }
             a {
                 color: inherit;
             }

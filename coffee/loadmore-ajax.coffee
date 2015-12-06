@@ -1,3 +1,4 @@
+'use strict'
 jQuery().ready ($)->
     checkAndHide = ()->
         if $('#main article').length >= parseInt($('#published_posts').val(), 10)

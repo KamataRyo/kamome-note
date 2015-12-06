@@ -41,14 +41,18 @@
 							<p class="site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
 						<?php endif; ?>
 					</div><!-- .site-branding -->
-					<div class="header-menu">
-						<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
+					<div class="header-menu" data-scroll-scope>
+						<?php
+							wp_nav_menu( array(
+								'theme_location' => 'primary',
+								'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>'//scroll-scope plugin attr.
+							) );
+						?>
 					</div>
 				</header><!-- #masthead -->
 
 			</div><!--.col-->
 		</div><!--.row-->
-
 
 		<div class="row">
 			<div id="content" class="site-content">

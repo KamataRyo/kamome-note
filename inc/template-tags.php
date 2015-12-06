@@ -141,7 +141,7 @@ function kamome_note_abbr_post( $post ) {
 	$thumbnail_class = has_post_thumbnail( $post->ID ) ? 'has-thumb' : 'no-thumb';
 	// ?>
 	<article id="post-<?php echo $post->ID; ?>" <?php post_class( 'post-grid_wrapper ' . $thumbnail_class, $post->ID ); ?>>
-		<header class="entry-header">
+		<header class="entry-header" data-scroll-scope>
 			<?php echo sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink( $post->ID ) ) ) . esc_html( $post->post_title ) . '</a></h2>'; ?>
 			<?php if ( 'post' === $post->post_type ) : ?>
 			<div class="entry-meta">
