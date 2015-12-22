@@ -10,9 +10,10 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
 	<header class="entry-header">
-		<p><?php kamome_note_post_thumbnail( $post ); ?></p>
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+		<?php the_title( '<h1 class="entry-title text-center">', '</h1>' ); ?>
+		<p class="text-center"><?php kamome_note_post_thumbnail( $post ); ?></p>
 		<div class="entry-meta">
 			<?php kamome_note_posted_on( $post ); ?>
 		</div><!-- .entry-meta -->
@@ -31,4 +32,5 @@
 	<footer class="entry-footer">
 		<p><?php kamome_note_tag_and_category( $post ); ?></p>
 	</footer><!-- .entry-footer -->
+
 </article><!-- #post-## -->
