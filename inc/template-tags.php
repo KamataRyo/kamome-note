@@ -10,25 +10,47 @@
 if ( ! function_exists( 'kamome_note_posted_on' ) ) :
 /**
  * Prints HTML with meta information for the current post-date/time and author.
+ * $query = array(
+ * 		post => post object
+ *		echo_time => true
+ *		echo_author => true
+ * )
  */
-function kamome_note_posted_on( $post ) {
-	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
-	if ( $post->post_date !== $post->post_modified ) {
-		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
-	}
+function kamome_note_posted_on( $query ) {
+	# parse query
+	extract( array_merge( array(
+		'class' => 'meta-element',
+		'echo_time' => true,
+		'echo_author' => true
+	), $query ) );
 
-	$time_string = sprintf( $time_string,
-		esc_attr( get_the_date( 'c', $post->ID ) ),
-		esc_html( get_the_date( get_option('date_format'), $post->ID ) ),
-		esc_attr( get_the_modified_date( 'c', $post->ID ) ),
-		esc_html( get_the_modified_date( get_option('date_format'), $post->ID ) )
-	);
+	$class = esc_attr( $class );
 
-	$posted_on = '<a href="' . esc_url( get_permalink( $post->ID ) ) . '" rel="bookmark">' . $time_string . '</a>';
-	$byline = '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID', $post->post_author ) ) ) . '">' . esc_html( get_the_author_meta( 'user_nicename', $post->post_author ) ) . '</a></span>';
+	if ( $echo_time ) :
+		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+		if ( $post->post_date !== $post->post_modified ) {
+			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+		}
 
-	echo '<span class="posted-on"><i class="post-meta glyphicon glyphicon-time"></i>' . $posted_on . '</span>'; // WPCS: XSS OK.
-	echo '<span class="byline"><i class="post-meta glyphicon glyphicon-user"></i>' . $byline . '</span>'; // WPCS: XSS OK.
+		$time_string = sprintf( $time_string,
+			esc_attr( get_the_date( 'c', $post->ID ) ),
+			esc_html( get_the_date( get_option('date_format'), $post->ID ) ),
+			esc_attr( get_the_modified_date( 'c', $post->ID ) ),
+			esc_html( get_the_modified_date( get_option('date_format'), $post->ID ) )
+		);
+
+		$posted_on = '<a href="' . esc_url( get_permalink( $post->ID ) ) . '" rel="bookmark">' . $time_string . '</a>';
+		echo '<span class="posted-on ' . $class . '"><i class="post-meta glyphicon glyphicon-time"></i>' . $posted_on . '</span>'; // WPCS: XSS OK.
+	endif;
+
+
+	if ( $echo_author ) :
+		$user_nicename = get_the_author_meta( 'user_nicename', $post->post_author );
+		if ( $user_nicename !== '' ) {
+			$byline = '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID', $post->post_author ) ) ) . '">' . esc_html( $user_nicename ) . '</a></span>';
+			echo '<span class="byline ' . $class . '"><i class="post-meta glyphicon glyphicon-user"></i>' . $byline . '</span>'; // WPCS: XSS OK.
+		}
+	endif;
 
 }
 endif;
@@ -55,12 +77,26 @@ if ( ! function_exists( 'kamome_note_tag_and_category' ) ) :
 /**
  * Prints HTML with meta information for the categories, tags and comments.
  */
-function kamome_note_tag_and_category( $post ) {
+function kamome_note_tag_and_category( $query ) {
+	# parse query
+	extract( array_merge( array(
+		'class' => 'meta-element',
+		'echo_tags' => true,
+		'echo_categories' => true
+	), $query ) );
+
+	$class = esc_attr( $class );
+
+
 	// Hide category and tag text for pages.
-	$taxonomies = array(
-		'category' => 'glyphicon glyphicon-folder-open',
-		'post_tag' => 'glyphicon glyphicon-tag'
-	);
+	$taxonomies = array();
+	if ( $echo_tags ) {
+		$taxonomies['post_tag'] = 'glyphicon glyphicon-tag';
+	}
+	if ( $echo_categories ) {
+		$taxonomies['category'] = 'glyphicon glyphicon-folder-open';
+	}
+
 	if ( 'post' === $post->post_type ) {
 		#$taxonomies = array( 'category', 'post_tag' );
 
@@ -69,8 +105,8 @@ function kamome_note_tag_and_category( $post ) {
 			if ( empty( $terms ) ) {
 				continue;
 			}
-			echo '<h3 class="taxonomy-title">' . get_taxonomy( $taxonomy)->label . '</h3>';
-			echo "<ul class=\"taxonomy-list ${taxonomy}\">";
+			echo '<h3 class="taxonomy-title">' . get_taxonomy( $taxonomy)->label . '</h3>'; # xss ok
+			echo "<ul class=\"taxonomy-list ${taxonomy} ${class}\">"; # xss ok
 			printf('<i class="post-meta %s"></i>', $icon_class );
 			foreach ( $terms as $term ) {
 				echo '<li class="taxonomy-list-item"><a href="' . get_term_link( $term, $taxonomy) . '">';
@@ -110,7 +146,7 @@ endif;
 
 
 
-
+# generate load more button
 function kamome_note_load_more_navigation( $stickies ) {
 
 	$args = kamome_note_ajax_acceptable_queries();//defined in functions.php
@@ -130,27 +166,44 @@ function kamome_note_load_more_navigation( $stickies ) {
 
 	printf( '<p id="end-of-articles" data-query="%s">',esc_attr( json_encode ( $query ) ) );
 	printf( '<input type="hidden" id="ids_of_stickies" value="%s">', json_encode( $stickies ) );
-	printf( '<input type="hidden" id="published_posts" value="%s">', $wp_query->found_posts );
-	wp_nonce_field( KAMOME_NOTE_AJAX_LOAD_MORE_ACTION,'ajax-nonce' ,false ,true );
-	printf('<a id="loadmore-button">%s</a>', esc_html__( 'LOAD MORE', 'kamome-note' ) );
+	printf( '<input type="hidden" id="published_posts" value="%s">', $wp_query -> found_posts );
+	wp_nonce_field( KAMOME_NOTE_AJAX_LOAD_MORE_ACTION, 'ajax-nonce' , false, true );
 	echo '</p>';
+	echo '<div class="loadmore_wrapper">';
+	printf('<a id="loadmore-button">%s</a>', esc_html__( 'LOAD MORE', 'kamome-note' ) );
+	echo '</div>';
 }
 
-
+# indexページ用のpostサムネイルを出力
 function kamome_note_abbr_post( $post ) {
 	$thumbnail_class = has_post_thumbnail( $post->ID ) ? 'has-thumb' : 'no-thumb';
 	// ?>
 	<article id="post-<?php echo $post->ID; ?>" <?php post_class( 'post-grid_wrapper ' . $thumbnail_class, $post->ID ); ?>>
 		<header class="entry-header" data-scroll-scope>
-			<?php echo sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink( $post->ID ) ) ) . esc_html( $post->post_title ) . '</a></h2>'; ?>
-			<?php if ( 'post' === $post->post_type ) : ?>
+			<?php if ( 'post' === $post -> post_type ) : ?>
 			<div class="entry-meta">
-				<?php kamome_note_posted_on( $post ); ?>
-				<?php kamome_note_tag_and_category( $post ); ?>
+				<?php
+					kamome_note_posted_on( array(
+						'post' => $post,
+						'class' => 'meta-element',
+						'echo_time' => true,
+						'echo_author' => false
+					) );
+				?>
+				<?php kamome_note_tag_and_category( array(
+					'post' => $post,
+					'class' => 'meta-element',
+					'echo_tags' => false,
+					'echo_categories' => true
+				) );
+				?>
 			</div><!-- .entry-meta -->
 			<?php endif; ?>
+			<?php echo sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink( $post->ID ) ) ) . esc_html( $post->post_title ) . '</a></h2>'; ?>
 		</header><!-- .entry-header -->
-		<?php kamome_note_post_thumbnail( $post ); ?>
+		<div class="img_wrapper">
+			<?php kamome_note_post_thumbnail( $post ); ?>
+		</div>
 	</article><!-- #post-## -->
 	<?php
 }

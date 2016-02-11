@@ -96,4 +96,4 @@ gulp.task 'watch', ()->
     gulp.watch scopes, tasks
 
 gulp.task 'default', tasks
-gulp.task 'developing', tasks.concat('watch')
+gulp.task 'dev', tasks.concat('watch')

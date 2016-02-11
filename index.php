@@ -19,7 +19,7 @@ get_header();
 <div class="contents-grid_wrapper <?php echo KAMOME_NOTE_BOOTSTRAP_GRID_OF_MAIN_COL; ?>">
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
-			<div class="text-center">
+			<div id="articles_wrapper" class="text-center">
 
 			<?php if ( have_posts() ) : ?>
 
@@ -45,14 +45,17 @@ get_header();
 						 };
 					?>
 				<?php endwhile; ?>
-				<?php kamome_note_load_more_navigation( $stickies ); ?>
 				<?php /* finish the Loop */ ?>
+				
+				</div><!--#articles_wrapper-->
+				<?php kamome_note_load_more_navigation( $stickies ); ?>
 
 			<?php else : ?>
 				<?php get_template_part( 'template-parts/content', 'none' ); ?>
+				</div><!--#articles_wrapper-->
+
 			<?php endif; ?>
 
-		</div><!--.text-center-->
 		</main><!-- #main -->
 	</div><!-- #primary -->
 </div><!--.col-->
