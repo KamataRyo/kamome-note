@@ -62,13 +62,16 @@ if ( ! function_exists( 'kamome_note_thumbnail' ) ) :
  */
 function kamome_note_post_thumbnail( $post ) {
 	if ( has_post_thumbnail( $post->ID ) ) {
+		echo '<p class="post_thumbnail_wrapper">';
 		echo get_the_post_thumbnail( $post->ID, '', array(
-			'class' => kamome_note_get_image_clip_class( get_attached_file( get_post_thumbnail_id( $post->ID ) ) )
+			'class' => 'post_thumbnail'
+			#'class' => kamome_note_get_image_clip_class( get_attached_file( get_post_thumbnail_id( $post->ID ) ) )
 		) );
-	} else {
-		$class = kamome_note_get_image_clip_class( get_template_directory() . '/img/noimage.png');
-		echo '<img src="' . get_template_directory_uri() . '/img/noimage.png' . '" class="' . esc_attr( $class ) . '" alt="noimage" />';
-	}
+		echo '</p>';
+	} //else {
+	// 	$class = kamome_note_get_image_clip_class( get_template_directory() . '/img/noimage.png');
+	// 	echo '<img src="' . get_template_directory_uri() . '/img/noimage.png' . '" class="' . esc_attr( $class ) . '" alt="noimage" />';
+	// }
 }
 endif;
 
@@ -106,8 +109,8 @@ function kamome_note_tag_and_category( $query ) {
 				continue;
 			}
 			echo '<h3 class="taxonomy-title">' . get_taxonomy( $taxonomy)->label . '</h3>'; # xss ok
-			echo "<ul class=\"taxonomy-list ${taxonomy} ${class}\">"; # xss ok
 			printf('<i class="post-meta %s"></i>', $icon_class );
+			echo "<ul class=\"taxonomy-list ${taxonomy} ${class}\">"; # xss ok
 			foreach ( $terms as $term ) {
 				echo '<li class="taxonomy-list-item"><a href="' . get_term_link( $term, $taxonomy) . '">';
 				echo esc_html( $term->name );
@@ -119,7 +122,7 @@ function kamome_note_tag_and_category( $query ) {
 
 	if ( ! is_single( $post ) && ! post_password_required( $post ) && ( comments_open( $post->ID ) || get_comments_number( $post->ID ) ) ) {
 		$comments_num = ( int )get_comments_number( $post->ID );
-		echo '<p class="comments-link"><i class="post-meta glyphicon glyphicon-pencil"></i><a href="' . get_permalink( $post->ID ) . '#comments">';
+		echo '<p class="comments-link ' . $class . '"><i class="post-meta glyphicon glyphicon-pencil"></i><a href="' . get_permalink( $post->ID ) . '#comments">'; # xss ok
 		if ( $comments_num === 0 ) {
 			echo esc_html__( 'Leave a comment', 'kamome-note' );
 		} elseif ( $comments_num === 1 ) {
@@ -136,7 +139,7 @@ function kamome_note_tag_and_category( $query ) {
 			esc_html__( 'Edit %s', 'kamome-note' ),
 			'<span class="screen-reader-text">"' . $post->title . '"</span>'
 		),
-		'<span class="edit-link"><i class="post-meta glyphicon glyphicon-wrench"></i>',
+		'<span class="edit-link ' . $class . '"><i class="post-meta glyphicon glyphicon-wrench"></i>', # xss ok
 		'</span>',
 		$post->ID
 	);
@@ -189,13 +192,13 @@ function kamome_note_abbr_post( $post ) {
 						'echo_time' => true,
 						'echo_author' => false
 					) );
-				?>
-				<?php kamome_note_tag_and_category( array(
-					'post' => $post,
-					'class' => 'meta-element',
-					'echo_tags' => false,
-					'echo_categories' => true
-				) );
+
+					kamome_note_tag_and_category( array(
+						'post' => $post,
+						'class' => 'meta-element',
+						'echo_tags' => false,
+						'echo_categories' => true
+					) );
 				?>
 			</div><!-- .entry-meta -->
 			<?php endif; ?>

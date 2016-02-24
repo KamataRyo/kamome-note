@@ -12,7 +12,7 @@ jQuery().ready ($)->
         if loading then return
 
         loading = true
-        $('body, #loadmore-button').css 'cursor', 'wait'
+        $('body, #loadmore-button').css 'cursor', 'progress'
 
         url = LOADMORE.endpoint
         query =

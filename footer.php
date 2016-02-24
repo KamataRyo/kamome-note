@@ -14,17 +14,19 @@
 		</div><!-- #content -->
 	</div><!--container-->
 
-	<div class="container-fluid">
-		<div class="row footer-row">
-			<footer id="colophon" class="site-footer text-center" role="contentinfo">
-				<div class="site-info">
-					<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'kamome-note' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'kamome-note' ), 'WordPress' ); ?></a>
-					<span class="sep"> | </span>
-					<?php printf( esc_html__( 'Theme: %1$s by %2$s.', 'kamome-note' ), 'kamome-note', '<a href="https://github.com/KamataRyo/" rel="designer">kamataryo</a>' ); ?>
-				</div><!-- .site-info -->
-			</footer><!-- #colophon -->
-		</div><!--.row-->
-	</div><!--container-fluid-->
+	<footer id="colophon" class="site-footer text-center" role="contentinfo">
+		<div class="site-info">
+			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'kamome-note' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'kamome-note' ), 'WordPress' ); ?></a>
+			<span class="sep"> | </span>
+			<?php
+				printf( esc_html__( 'Theme: %1$s by %2$s DIYed from %3$s.', 'kamome-note' ),
+					'kamome-note',
+					'<a href="https://github.com/KamataRyo/" rel="designer">kamataryo</a>',
+					'<a href="http://underscores.me/" rel="designer">_s</a>'
+				);
+			?>
+		</div><!-- .site-info -->
+	</footer><!-- #colophon -->
 
 </div><!-- #page -->
 

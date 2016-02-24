@@ -21,38 +21,41 @@
 </head>
 
 <body <?php body_class(); ?>>
-<div id="page" class="site">
+	<div id="page" class="site">
 
-	<div class="container-fluid">
-		<div class="row header-row" style="background-image:url(<?php esc_url( header_image() ); ?>);">
-			<div class="col-xs-12">
 
-				<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'kamome-note' ); ?></a>
-				<header id="masthead" class="site-header" role="banner">
-					<div class="site-branding">
-						<?php if ( is_front_page() && is_home() ) : ?>
-							<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-						<?php else : ?>
-							<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-						<?php endif;
+	<?php # homeかそうでないかでheaderの様子を切り替える
+	if ( is_home() ): ?>
+		<div class="header-row" style="background-image:url(<?php esc_url( header_image() ); ?>);">
+			<div class="header-mask"></div>
+	<?php else: ?>
+		<div class="header-row">
+			<div class="header-icon_wrapper">
+				<img src="<?php esc_url( header_image() ); ?>" alt="header icon">
+			</div>
+	<?php endif; ?>
 
-						$description = get_bloginfo( 'description', 'display' );
-						if ( $description || is_customize_preview() ) : ?>
-							<p class="site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
-						<?php endif; ?>
-					</div><!-- .site-branding -->
-					<div class="header-menu" data-scroll-scope>
-						<?php
-							wp_nav_menu( array(
-								'theme_location' => 'primary',
-								'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>'//scroll-scope plugin attr.
-							) );
-						?>
-					</div>
-				</header><!-- #masthead -->
 
-			</div><!--.col-->
-		</div><!--.row-->
+			<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'kamome-note' ); ?></a>
+			<header id="masthead" class="site-header" role="banner">
+				<div class="site-branding">
+					<?php if ( is_front_page() && is_home() ) : ?>
+						<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+					<?php else : ?>
+						<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+					<?php endif;
 
-		<div class="row">
-			<div id="content" class="site-content">
+					$description = get_bloginfo( 'description', 'display' );
+					if ( $description || is_customize_preview() ) : ?>
+						<p class="site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
+					<?php endif; ?>
+				</div><!-- .site-branding -->
+			</header><!-- #masthead -->
+
+		</div><!--.header-row-->
+
+
+		<div class="container">
+
+			<div class="row">
+				<div id="content" class="site-content">

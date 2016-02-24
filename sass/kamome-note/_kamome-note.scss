@@ -1,9 +1,9 @@
 /*kamome-note sass*/
 @import "compass/css3/border-radius";
 @import "compass/css3/images";
+@import "compass/css3/box-shadow";
 
-$header_height: 320px;
-$article_gap: 10px;
+$header_height: 160px;
 $c1: #CFD5DF;
 $c2: #A1BFE3;
 $c3: #8BB0DE;
@@ -16,18 +16,48 @@ $c5: #6E7C92;
     -webkit-transition: .1s;
     transition: .1s;
     &:hover {
-        cursor:pointer;
-        background-color:$c5;
+        cursor: pointer;
+        background-color: $c5;
         color: $c1;
     }
+}
+
+@mixin main-col-width() {
+    max-width: 640px;
+    width: 90%;
 }
 
 html {
     font-size: 14px;
 }
+
 body {
-    background-color: white;
+    background-color: lighten($c1,15%);
     font-weight:200;
+}
+
+
+//entryのコンテンツのスタイル
+.entry-content {
+    p {
+        color: black;
+        font-size: 18px;
+    }
+}
+
+
+
+.header-mask {
+    margin: 0 auto;
+    width:100%;
+    max-width: 1600px;
+    height: $header_height;
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fdfdfe+0,fdfdfe+100&1+0,0+25,0+75,1+100 */
+    background: -moz-linear-gradient(left,  rgba(253,253,254,1) 0%, rgba(253,253,254,0) 30%, rgba(253,253,254,0) 70%, rgba(253,253,254,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  rgba(253,253,254,1) 0%,rgba(253,253,254,0) 30%,rgba(253,253,254,0) 70%,rgba(253,253,254,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  rgba(253,253,254,1) 0%,rgba(253,253,254,0) 30%,rgba(253,253,254,0) 70%,rgba(253,253,254,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdfdfe', endColorstr='#fdfdfe',GradientType=1 ); /* IE6-9 */
 }
 
 .header-row {
@@ -38,60 +68,70 @@ body {
     background-attachment: fixed;
     background-position: top center;
     overflow: hidden;
-    margin-bottom: $article_gap;
-    .site-title {
-        display: inline-block;
-        margin: 5px;
-    }
-    .site-description{
-        display: inline-block;
-        margin: 5px;
-        &:before {
-            content : '|';
+    margin-bottom: 50px;
+
+    .site-header {
+        left: 0;
+        bottom: 0;
+        position: absolute;
+        display:inline;
+        width:100%;
+        text-align: right;
+        div.site-branding {
+            color: $c5;
+            margin: .5em auto 0;
+            max-width: 640px;
+            h1,p {
+                bottom: 0;
+            }
+        }
+        .site-title {
+            display: inline;
+            font-size: 1em;
+            a {
+                color: inherit;
+                text-decoration: none;
+                -webkit-transition: .1s;
+                transition: .1s;
+                &:hover {
+                    opacity: .6;
+                }
+            }
+        }
+        .site-description {
+            display: inline;
+            font-size: 1em;
+            margin-right: 30px;
+            &:before {
+                content : '-';
+            }
         }
     }
+    border-bottom: 1px dotted $c1;
 }
-div.site-branding {
-    color: $c5;
-    font-size:1em;
-    a {
-        color: inherit;
-    }
-}
-div.header-menu {
-    position: absolute;
-    display:inline;
-    padding-top: 5px;
-    width: auto;
-    height: $header_height - 30px;//h1 line diff
-    overflow: scroll;
-    margin-left:4em;
-    &::-webkit-scrollbar {
-        display:none;
-    }
-    ul {
-        margin-left: 0;
-        list-style: none;
-        &#menu-all-pages {
-            padding-left: 0;
-        }
-    }
-    a {
-        @include border-radius(8px);
-        text-decoration: none;
-        padding: .4em;
-        @include kamome-note-button-effect(0);
-        &:hover {
-            //override button effect
-            background-color:rgba($c5,.5);
-        }
-    }
+body.home .header-row {
+    border-bottom: none;
 }
 
 
-.contents-grid_wrapper {
+.header-icon_wrapper {
+    margin: 20px auto;
+    height: $header_height - 40px;
+    overflow: hidden;
+    width:$header_height - 40px;
+    position: relative;
+    display: block;
+    @include border-radius($header_height / 2);
+    img {
+        max-width: none;
+        position: relative;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+    }
 }
-
 
 
 
@@ -100,55 +140,54 @@ div.header-menu {
 
 .post-grid_wrapper {
     position: relative;
-    @media only screen and (max-width: 767px) {
-        width: 90%;
-    }
-    width: 40%;
-    height:360px;
-    overflow: hidden;
-    background-color: $c5;
-    font-size:16px;
-    color:$c1;
-    display: inline-block;
-    background-color: $c3;
-    margin: 5px;
+    @include main-col-width();
+    display: block;
+    margin: 10px auto;
+    padding-bottom: 40px;
+    border-bottom: 1px dotted $c1;
+
 
     a {
-        color:$c1;
-    }
-    .entry-header {
-        overflow: scroll;
-        &::-webkit-scrollbar {
-            display:none;
+        color: $c5;
+        -webkit-transition: .1s;
+        transition: .1s;
+        text-decoration: none;
+        &:hover {
+            opacity: .6;
         }
-        padding: 10px;
-        position: absolute;
+    }
+    color: $c5;
+
+    .entry-header, .entry-footer {
+        font-size:16px;
         text-align:left;
-    	top: 0;
-    	left: 0;
-    	z-index: 2;
     	width: 100%;
     	height: 100%;
-    	background: rgba($c5,.8);
     	-webkit-transition: .2s;
     	transition: .2s;
-    	opacity: 0;
-        &:hover {
-            opacity:1;
-        }
-        @media only screen and (max-width: 767px) {
-            opacity:0.6;
-        }
+        position: relative;
+
 
         .meta-element {
+            font-size: 14px;
             display: inline;
             margin-right: 20px;
+            color: $c5;
+            a {
+                color: $c5;
+            }
         }
 
         .entry-title {
-            margin: 10px 10px;
+            margin: 40px 10px 20px 10px;
             font-size:32px;
+            font-weight: 800;
+            color:$c5;
+
         }
+    }
+    .entry-footer {
+        margin-top: 2em;
     }
 
     .taxonomy-title {
@@ -167,11 +206,7 @@ div.header-menu {
     }
 }
 
-.img_wrapper {
-    margin-top: 100px;
-    width: 100%;
-    height: 360px;
-}
+
 
 .post-grid_wrapper.no-thumb {
     .entry-header {
@@ -179,15 +214,26 @@ div.header-menu {
     }
 }
 
-.post-grid_wrapper img {
-    position:absolute;
-    top:50%;
-    left:50%;
-    width:100%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+.post-grid_wrapper {
+    .post_thumbnail_wrapper {
+        margin: auto;
+        height: $header_height;
+        overflow: hidden;
+        width:100%;
+        @include border-radius(5px);
+        img.post_thumbnail {
+            width:100%;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+        }
+    }
+
 }
+
 
 
 
@@ -207,18 +253,16 @@ a#loadmore-button {
     @include kamome-note-button-effect();
 }
 
-
 .sidebar-grid_wrapper {
-    width:100%;
     display: block;
-    margin: auto;
+    margin: 30px 10%;
+    width: auto;
     padding: 0;
     .widget-title {
         display: none;
     }
     ul {
-        margin: auto;
-        width:80%;
+        margin:0 auto;
         padding: 0;
         li.cat-item {
             display: inline-block;
@@ -232,13 +276,21 @@ a#loadmore-button {
                 @include border-radius(20px);
                 @include kamome-note-button-effect();
                 text-decoration: none;
-                color: inherit;
             }
         }
     }
 }
 
-.footer-row {
+
+.comments-area {
+    @include main-col-width();
+    display: block;
+    margin: 10px auto;
+    border-bottom: 1px dotted $c1;
+}
+
+
+.site-footer {
     color: $c5;
     font-size:.8em;
     a{
@@ -269,4 +321,9 @@ p.comments-link {
 i.post-meta {
     display:inline;
     margin-right: 7px;
+}
+
+input.submit {
+    @include border-radius(40px);
+    @include kamome-note-button-effect();
 }

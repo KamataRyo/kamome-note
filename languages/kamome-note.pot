@@ -14,20 +14,12 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
 
-#: 404.php:19
+#: 404.php:18
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
-#: 404.php:23
+#: 404.php:22
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
-msgstr ""
-
-#: 404.php:31
-msgid "Most Used Categories"
-msgstr ""
-
-#: 404.php:48
-msgid "Try looking in the monthly archives. %1$s"
 msgstr ""
 
 #: comments.php:31
@@ -53,51 +45,47 @@ msgstr ""
 msgid "Comments are closed."
 msgstr ""
 
-#: footer.php:21
+#: footer.php:19
 msgid "https://wordpress.org/"
 msgstr ""
 
-#: footer.php:21
+#: footer.php:19
 msgid "Proudly powered by %s"
 msgstr ""
 
-#: footer.php:23
-msgid "Theme: %1$s by %2$s."
+#: footer.php:22
+msgid "Theme: %1$s by %2$s DIYed from %3$s."
 msgstr ""
 
-#: functions.php:47
-msgid "Primary Menu"
-msgstr ""
-
-#: functions.php:103
+#: functions.php:99
 msgid "Sidebar"
 msgstr ""
 
-#: header.php:30
+#: header.php:39
 msgid "Skip to content"
 msgstr ""
 
-#: inc/template-tags.php:124
+#: inc/template-tags.php:127
 msgid "Leave a comment"
 msgstr ""
 
-#: inc/template-tags.php:126
+#: inc/template-tags.php:129
 msgid "1 Comment"
 msgstr ""
 
-#: inc/template-tags.php:128
+#: inc/template-tags.php:131
 msgid "%d Comments"
 msgstr ""
 
-#: inc/template-tags.php:136, template-parts/content-page.php:32
+#: inc/template-tags.php:139
 msgid "Edit %s"
 msgstr ""
 
-#: inc/template-tags.php:173
+#: inc/template-tags.php:176
 msgid "LOAD MORE"
 msgstr ""
 
-#: search.php:21
+#: search.php:20
 msgid "Search Results for: %s"
 msgstr ""
 
@@ -117,6 +105,6 @@ msgstr ""
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr ""
 
-#: template-parts/content-page.php:21, template-parts/content-single.php:26
+#: template-parts/content-page.php:23, template-parts/content-single.php:39
 msgid "Pages:"
 msgstr ""

@@ -16,7 +16,6 @@ get_header();
 ?>
 
 
-<div class="contents-grid_wrapper <?php echo KAMOME_NOTE_BOOTSTRAP_GRID_OF_MAIN_COL; ?>">
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 			<div id="articles_wrapper" class="text-center">
@@ -46,7 +45,7 @@ get_header();
 					?>
 				<?php endwhile; ?>
 				<?php /* finish the Loop */ ?>
-				
+
 				</div><!--#articles_wrapper-->
 				<?php kamome_note_load_more_navigation( $stickies ); ?>
 
@@ -58,7 +57,7 @@ get_header();
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
-</div><!--.col-->
+
 
 
 <?php
