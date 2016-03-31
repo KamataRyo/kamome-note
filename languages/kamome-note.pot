@@ -105,6 +105,6 @@ msgstr ""
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr ""
 
-#: template-parts/content-page.php:23, template-parts/content-single.php:39
+#: template-parts/content-page.php:23, template-parts/content-single.php:40
 msgid "Pages:"
 msgstr ""

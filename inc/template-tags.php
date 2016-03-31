@@ -183,26 +183,26 @@ function kamome_note_abbr_post( $post ) {
 	// ?>
 	<article id="post-<?php echo $post->ID; ?>" <?php post_class( 'post-grid_wrapper ' . $thumbnail_class, $post->ID ); ?>>
 		<header class="entry-header" data-scroll-scope>
+			<?php echo sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink( $post->ID ) ) ) . esc_html( $post->post_title ) . '</a></h2>'; ?>
 			<?php if ( 'post' === $post -> post_type ) : ?>
 			<div class="entry-meta">
 				<?php
-					kamome_note_posted_on( array(
-						'post' => $post,
-						'class' => 'meta-element',
-						'echo_time' => true,
-						'echo_author' => false
-					) );
-
 					kamome_note_tag_and_category( array(
 						'post' => $post,
 						'class' => 'meta-element',
 						'echo_tags' => false,
 						'echo_categories' => true
 					) );
+
+					kamome_note_posted_on( array(
+						'post' => $post,
+						'class' => 'meta-element',
+						'echo_time' => true,
+						'echo_author' => false
+					) );
 				?>
 			</div><!-- .entry-meta -->
 			<?php endif; ?>
-			<?php echo sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink( $post->ID ) ) ) . esc_html( $post->post_title ) . '</a></h2>'; ?>
 		</header><!-- .entry-header -->
 		<div class="img_wrapper">
 			<?php kamome_note_post_thumbnail( $post ); ?>

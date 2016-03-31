@@ -53,7 +53,6 @@ body {
     max-width: 1600px;
     height: $header_height;
 
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fdfdfe+0,fdfdfe+100&1+0,0+25,0+75,1+100 */
     background: -moz-linear-gradient(left,  rgba(253,253,254,1) 0%, rgba(253,253,254,0) 30%, rgba(253,253,254,0) 70%, rgba(253,253,254,1) 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(left,  rgba(253,253,254,1) 0%,rgba(253,253,254,0) 30%,rgba(253,253,254,0) 70%,rgba(253,253,254,1) 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to right,  rgba(253,253,254,1) 0%,rgba(253,253,254,0) 30%,rgba(253,253,254,0) 70%,rgba(253,253,254,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
@@ -69,7 +68,7 @@ body {
     background-position: top center;
     overflow: hidden;
     margin-bottom: 50px;
-
+    
     .site-header {
         left: 0;
         bottom: 0;
@@ -108,6 +107,7 @@ body {
         }
     }
     border-bottom: 1px dotted $c1;
+
 }
 body.home .header-row {
     border-bottom: none;
@@ -179,7 +179,7 @@ body.home .header-row {
         }
 
         .entry-title {
-            margin: 40px 10px 20px 10px;
+            margin: 40px 10px 10px 0;
             font-size:32px;
             font-weight: 800;
             color:$c5;
