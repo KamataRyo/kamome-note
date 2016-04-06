@@ -1,0 +1,1 @@
+var Name;Name=require("../models/"),module.exports={docs:function(e,n){return n.json({message:"Successfully posted a test message!"})},index:function(e,n){return Name.find(function(e,s){return e?n.send(e):n.json(s)})},species:function(e,n){return Name.find({rank:"species"},function(e,s){return e?n.send(e):n.json(s)})}};

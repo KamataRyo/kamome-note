@@ -1,0 +1,1 @@
+var frisby,meta,url,version;frisby=require("frisby"),meta=require("../package.json"),version=meta.version.split(".")[0],url=function(r){return"http://localhost:3000/"+version+"/"+r},frisby.create("Test run of frisby.").get(url("")).expectStatus(200).toss(),frisby.create("Test of GET birds").get(url("birds")).expectStatus(200).toss();

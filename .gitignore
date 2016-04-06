@@ -1,0 +1,6 @@
+.travis.yml
+README.md
+bin
+*.coffee
+node_modules
+package.json
