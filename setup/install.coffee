@@ -46,7 +46,7 @@ if rootName isnt meta.name
 fs.stat "#{absPath}/style.css", (err, stats) ->
     if err
         if err.code is 'ENOENT'
-            No theme exists.
+            # No theme exists.
             request.post(options)
                 .on 'error', (err)->
                     console.log "broken pipe, http error: #{err}"
